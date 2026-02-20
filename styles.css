@@ -127,12 +127,16 @@ nav {
 }
 .hero::after {
   content: '☀️';
-  position: absolute; top: 8%; right: 8%;
+  position: absolute; top: 6%; left: 0;
   font-size: clamp(5rem, 12vw, 11rem);
-  opacity: 0.12; pointer-events: none; user-select: none;
-  animation: float 6s ease-in-out infinite;
+  opacity: 0.18; pointer-events: none; user-select: none;
+  animation: sunTrack 32s linear infinite;
 }
-@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-18px); } }
+@keyframes sunTrack {
+  0%   { transform: translateX(-14vw) translateY(3rem); }
+  50%  { transform: translateX(44vw)  translateY(0);    }
+  100% { transform: translateX(110vw) translateY(3rem); }
+}
 
 .hero-inner {
   max-width: 1200px; margin: 0 auto; width: 100%;
