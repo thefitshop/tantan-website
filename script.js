@@ -39,8 +39,8 @@ const PRODUCTS = [
   { id: 25, cat: 'Tanning Gel', name: 'Tanning Gel Dark Orange',        emoji: '🍊', grad: 'gfro', price: 23.99, desc: 'Our deepest orange-scented gel for a rich, intense tan. Argan oil and vitamin E ensure deep hydration while DHA creates a streak-free, dark bronze glow.' },
 
   // ── Skincare ──
-  { id: 5, cat: 'Skincare', name: 'After-Sun Moisturiser', emoji: '🌸', grad: 'g5', price: 18.99, desc: 'Soothe, cool and extend your tan with aloe vera, vitamin E & shea butter.' },
-  { id: 8, cat: 'Skincare', name: 'Tan Remover Scrub',     emoji: '🫧', grad: 'g8', price: 14.99, desc: 'Gently erase old, uneven tan and prep skin for a fresh, flawless application.' },
+  { id: 5, cat: 'Skincare', name: 'After-Sun Moisturiser', emoji: '🌸', grad: 'g5', price: 27.50, desc: 'Soothe, cool and extend your tan with aloe vera, vitamin E & shea butter.' },
+  { id: 8, cat: 'Skincare', name: 'Tan Remover Scrub',     emoji: '🫧', grad: 'g8', price: 27.50, desc: 'Gently erase old, uneven tan and prep skin for a fresh, flawless application.' },
 
   // ── Self Tanning Drops ──
   { id: 26, cat: 'Self Tanning Drops', name: 'Strawberry Self Tanning Drops',  emoji: '🍓', grad: 'gfrs', price: 22.99, desc: 'Buildable self-tanning drops infused with ripe strawberry extract. Mix a few drops into your moisturiser for a customisable, natural-looking glow with a fresh fruity scent.' },
