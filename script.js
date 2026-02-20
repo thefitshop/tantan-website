@@ -374,20 +374,7 @@ function initCheckout() {
 function initAnnouncement() {
   const el = document.getElementById('announcement-text');
   if (!el) return;
-  const messages = [
-    'Message us on Telegram before ordering! 💬',
-    'Free delivery on orders over £30 🚚',
-    'Premium tanning products for your golden glow ☀️',
-  ];
-  let i = 0;
-  setInterval(() => {
-    el.classList.add('ann-out');
-    setTimeout(() => {
-      i = (i + 1) % messages.length;
-      el.textContent = messages[i];
-      el.classList.remove('ann-out');
-    }, 450);
-  }, 3500);
+  el.textContent = 'Message us on Telegram before ordering! 💬';
 }
 
 // ── Boot ─────────────────────────────────────
