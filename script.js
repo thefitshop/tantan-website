@@ -360,11 +360,18 @@ function initCheckout() {
       if (!selected) { showToast('Please select a payment method'); return; }
 
       // Validate customer details
-      const nameEl  = document.getElementById('cust-name');
-      const emailEl = document.getElementById('cust-email');
-      const phoneEl = document.getElementById('cust-phone');
-      if (nameEl  && !nameEl.value.trim())  { showToast('Please enter your full name');  nameEl.focus();  return; }
-      if (emailEl && !emailEl.value.trim()) { showToast('Please enter your email address'); emailEl.focus(); return; }
+      const nameEl     = document.getElementById('cust-name');
+      const emailEl    = document.getElementById('cust-email');
+      const phoneEl    = document.getElementById('cust-phone');
+      const addressEl  = document.getElementById('cust-address');
+      const cityEl     = document.getElementById('cust-city');
+      const postcodeEl = document.getElementById('cust-postcode');
+      if (nameEl     && !nameEl.value.trim())     { showToast('Please enter your full name');      nameEl.focus();     return; }
+      if (emailEl    && !emailEl.value.trim())    { showToast('Please enter your email address');  emailEl.focus();    return; }
+      if (phoneEl    && !phoneEl.value.trim())    { showToast('Please enter your phone number');   phoneEl.focus();    return; }
+      if (addressEl  && !addressEl.value.trim())  { showToast('Please enter your street address'); addressEl.focus();  return; }
+      if (cityEl     && !cityEl.value.trim())     { showToast('Please enter your city');           cityEl.focus();     return; }
+      if (postcodeEl && !postcodeEl.value.trim()) { showToast('Please enter your postcode');       postcodeEl.focus(); return; }
 
       if (selected.dataset.method === 'card') {
         const inputs = cardForm.querySelectorAll('input');
@@ -381,9 +388,12 @@ function initCheckout() {
         id: orderId,
         date: new Date().toISOString(),
         customer: {
-          name:  nameEl  ? nameEl.value.trim()  : '',
-          email: emailEl ? emailEl.value.trim() : '',
-          phone: phoneEl ? phoneEl.value.trim() : ''
+          name:     nameEl     ? nameEl.value.trim()     : '',
+          email:    emailEl    ? emailEl.value.trim()    : '',
+          phone:    phoneEl    ? phoneEl.value.trim()    : '',
+          address:  addressEl  ? addressEl.value.trim()  : '',
+          city:     cityEl     ? cityEl.value.trim()     : '',
+          postcode: postcodeEl ? postcodeEl.value.trim().toUpperCase() : ''
         },
         items:    basket.map(i => ({ id: i.id, name: i.name, price: i.price, qty: i.qty })),
         subtotal: subtotal,

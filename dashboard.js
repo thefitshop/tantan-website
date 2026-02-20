@@ -177,7 +177,8 @@ function renderOrders() {
       <td>
         <strong>${o.customer.name || '—'}</strong><br>
         <span style="font-size:0.75rem;color:var(--muted)">${o.customer.email || ''}</span><br>
-        <span style="font-size:0.75rem;color:var(--muted)">${o.customer.phone || ''}</span>
+        <span style="font-size:0.75rem;color:var(--muted)">${o.customer.phone || ''}</span><br>
+        ${o.customer.address ? `<span style="font-size:0.75rem;color:var(--muted)">${o.customer.address}, ${o.customer.city || ''} ${o.customer.postcode || ''}</span>` : ''}
       </td>
       <td style="font-size:0.82rem;color:var(--muted)">${items}</td>
       <td><strong>${fmt(o.total)}</strong><br><span style="font-size:0.75rem;color:var(--muted)">incl. ${o.delivery === 0 ? 'free' : fmt(o.delivery)} delivery</span></td>
