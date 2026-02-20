@@ -288,22 +288,35 @@ nav {
   overflow: hidden;
 }
 
-/* Beach image inside product card */
+/* Stock photo fills the full image area — consistent across all cards */
 .prod-beach-img {
-  width: 128px;
-  height: 128px;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center; /* overridden per-card via inline style */
   display: block;
-  flex-shrink: 0;
-  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.20));
-  transition: transform 0.25s ease;
+  transition: transform 0.55s ease;
 }
 
 .product-card:hover .prod-beach-img {
-  transform: scale(1.1) rotate(-3deg);
+  transform: scale(1.07);
 }
 
-/* Emoji fallback (shown if image fails to load) */
+/* Golden warm overlay — applied to every product image for consistent brand tone */
+.product-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 190, 70, 0.20) 0%,
+    rgba(220, 130, 20, 0.16) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Emoji fallback (shown if Unsplash image fails to load) */
 .prod-emoji-fb {
   font-size: 4.5rem;
   display: flex;
