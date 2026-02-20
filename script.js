@@ -370,18 +370,10 @@ function initCheckout() {
   }
 }
 
-// ── Announcement bar ─────────────────────────
-function initAnnouncement() {
-  const el = document.getElementById('announcement-text');
-  if (!el) return;
-  el.textContent = 'Message us on Telegram before ordering! 💬';
-}
-
 // ── Boot ─────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   refreshBadge();
   initNav();
-  initAnnouncement();
   initFeatured();
   initProducts();
   initBasket();
