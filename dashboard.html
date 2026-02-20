@@ -273,6 +273,16 @@
   </div><!-- /#dash-app -->
 
   <script src="script.js?v=33"></script>
-  <script src="dashboard.js?v=10"></script>
+  <!-- Core shared utilities — loaded first -->
+  <script src="dashboard.js?v=11"></script>
+  <!-- Section files — one per tab, safe to edit independently -->
+  <script src="dashboard-stock.js?v=1"></script>
+  <script src="dashboard-orders.js?v=1"></script>
+  <script src="dashboard-customers.js?v=1"></script>
+  <script src="dashboard-pl.js?v=1"></script>
+  <script src="dashboard-products.js?v=1"></script>
+  <script src="dashboard-popular.js?v=1"></script>
+  <!-- Login / init — loaded last so all sections are defined -->
+  <script src="dashboard-login.js?v=1"></script>
 </body>
 </html>
