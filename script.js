@@ -270,7 +270,7 @@ function initNav() {
 }
 
 // ── Shared: product card HTML ─────────────────
-const TWEMOJI_BASE = 'https://cdn.jsdelivr.net/npm/twemoji@14.0.2/assets/svg/';
+const TWEMOJI_BASE = 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/';
 
 function productCardHTML(p, btnLabel = '+ Add to Basket') {
   const stock   = JSON.parse(localStorage.getItem('tantan_stock')) || {};
