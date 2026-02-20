@@ -71,6 +71,33 @@ const PRODUCTS = [
 
 ];
 
+// ── Category display config ───────────────────
+// IMPORTANT: must be declared BEFORE the IIFE below,
+// which reads and mutates these arrays at runtime.
+const CAT_ORDER = [
+  'Tanning Oils',
+  'Aerosol Tans',
+  'Spray Tan Solution',
+  'Tanning Gel',
+  'Self Tanning Drops',
+  'Tanning Foam',
+  'Self Tans',
+  'Skincare',
+  'Tanning Mitts',
+];
+
+const CAT_ICONS = {
+  'Tanning Oils':       '🫙',
+  'Aerosol Tans':       '💨',
+  'Spray Tan Solution': '💎',
+  'Tanning Gel':        '✨',
+  'Self Tanning Drops': '💧',
+  'Tanning Foam':       '🫧',
+  'Self Tans':          '🌟',
+  'Skincare':           '🌸',
+  'Tanning Mitts':      '🧤',
+};
+
 // ── Apply dashboard product overrides, deletions, renames & added products ──
 (function () {
   const ov       = JSON.parse(localStorage.getItem('tantan_product_overrides')) || {};
@@ -116,31 +143,6 @@ const PRODUCTS = [
     }
   });
 }());
-
-// ── Category display config ───────────────────
-const CAT_ORDER = [
-  'Tanning Oils',
-  'Aerosol Tans',
-  'Spray Tan Solution',
-  'Tanning Gel',
-  'Self Tanning Drops',
-  'Tanning Foam',
-  'Self Tans',
-  'Skincare',
-  'Tanning Mitts',
-];
-
-const CAT_ICONS = {
-  'Tanning Oils':       '🫙',
-  'Aerosol Tans':       '💨',
-  'Spray Tan Solution': '💎',
-  'Tanning Gel':        '✨',
-  'Self Tanning Drops': '💧',
-  'Tanning Foam':       '🫧',
-  'Self Tans':          '🌟',
-  'Skincare':           '🌸',
-  'Tanning Mitts':      '🧤',
-};
 
 // ── Basket (localStorage) ───────────────────
 const KEY = 'tantan_basket';
