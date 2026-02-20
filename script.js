@@ -71,65 +71,72 @@ const PRODUCTS = [
 
 ];
 
-// ── Beach-themed Twemoji image per product ────
-// Each value is the Twemoji codepoint (jsDelivr CDN, no API key needed).
-// Every product has a unique image — beach, sun, ocean and tropical themes.
-const BEACH_IMGS = {
-  // Self Tans
-  1:  '1f305',  // 🌅 sunrise
-  2:  '1f30a',  // 🌊 wave
-  4:  '2600',   // ☀️ sun
-  6:  '1f31e',  // 🌞 sun with face
-  // Tanning Oils
-  3:  '1f334',  // 🌴 palm tree
-  9:  '1f33a',  // 🌺 hibiscus
-  10: '1f33b',  // 🌻 sunflower
-  11: '1f3d6',  // 🏖️ beach with umbrella
-  12: '1f3dd',  // 🏝️ desert island
-  44: '1f304',  // 🌄 sunrise over mountains
-  45: '1f307',  // 🌇 city at sunset
-  47: '26f1',   // ⛱️ umbrella on ground
-  46: '1f3c4',  // 🏄 surfer
-  42: '1f9a9',  // 🦩 flamingo
-  43: '1f41a',  // 🐚 spiral shell
-  // Aerosol Tans
-  13: '1f338',  // 🌸 cherry blossom
-  14: '1f379',  // 🍹 tropical drink
-  15: '1f98b',  // 🦋 butterfly
-  16: '1f420',  // 🐠 tropical fish
-  // Spray Tan Solution
-  17: '1f324',  // 🌤️ sun behind cloud
-  18: '1f31f',  // 🌟 glowing star
-  19: '1f306',  // 🌆 city at dusk
-  // Tanning Gel
-  20: '1f337',  // 🌷 tulip
-  21: '1f33c',  // 🌼 blossom
-  22: '1f965',  // 🥥 coconut
-  23: '1f980',  // 🦀 crab
-  24: '1f308',  // 🌈 rainbow
-  25: '1f99e',  // 🦞 lobster
-  50: '1f421',  // 🐡 blowfish
-  51: '1f42c',  // 🐬 dolphin
-  52: '1f422',  // 🐢 turtle
-  // Skincare
-  5:  '26c5',   // ⛅ partly cloudy
-  8:  '1f99c',  // 🦜 parrot
-  // Self Tanning Drops
-  26: '2728',   // ✨ sparkles
-  27: '1f4ab',  // 💫 dizzy star
-  28: '2693',   // ⚓ anchor
-  29: '26f5',   // ⛵ sailboat
-  // Tanning Foam
-  36: '1f33f',  // 🌿 herb / tropical leaf
-  37: '1f419',  // 🐙 octopus
-  38: '1f988',  // 🦈 shark
-  // Tanning Mitts
-  39: '1f3a1',  // 🎡 ferris wheel (beach carnival)
-  40: '1f33e',  // 🌾 tropical reeds
-  41: '1f6a4',  // 🚤 speedboat
-  48: '1f3ca',  // 🏊 swimmer
-  49: '1f320',  // 🌠 shooting star
-};
+// ── Professional Unsplash product images ──────
+// Three themes rotate across all 45 products:
+//   SUN   — golden glowing sunrise / sunset sky
+//   PALM  — elegant tropical palm tree
+//   BEACH — stunning sandy beach / crystal water
+// Each entry: { u: imageURL, p: CSS object-position }
+const PRODUCT_IMGS = (function () {
+  // Confirmed-working Unsplash photo IDs (direct CDN, no API key needed)
+  var S1 = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=600&fit=crop&q=80'; // golden sunrise
+  var S2 = 'https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?w=600&h=600&fit=crop&q=80'; // golden sunset sky
+  var S3 = 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&h=600&fit=crop&q=80'; // sun rays over water
+  var S4 = 'https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=600&h=600&fit=crop&q=80'; // warm golden sky
+  var P1 = 'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=600&h=600&fit=crop&q=80'; // tropical palm tree
+  var B1 = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=600&fit=crop&q=80'; // crystal beach water
+  var B2 = 'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=600&h=600&fit=crop&q=80'; // sandy tropical beach
+  return {
+    // ── SUN theme ─────────────────────────────────────────────────
+    3:  { u: S1, p: 'center'  },
+    11: { u: S2, p: '30% 30%' },
+    45: { u: S3, p: '70% 30%' },
+    42: { u: S4, p: '50% 20%' },
+    14: { u: S1, p: '30% 50%' },
+    17: { u: S2, p: '70% 50%' },
+    20: { u: S3, p: '20% 40%' },
+    23: { u: S4, p: '80% 40%' },
+    50: { u: S1, p: '50% 60%' },
+    26: { u: S2, p: '30% 70%' },
+    29: { u: S3, p: '70% 70%' },
+    38: { u: S4, p: '40% 35%' },
+    4:  { u: S1, p: '60% 25%' },
+    8:  { u: S2, p: '25% 55%' },
+    41: { u: S3, p: '75% 45%' },
+    // ── PALM theme ────────────────────────────────────────────────
+    9:  { u: P1, p: 'center'  },
+    12: { u: P1, p: '40% 30%' },
+    47: { u: P1, p: '60% 30%' },
+    43: { u: P1, p: '40% 70%' },
+    15: { u: P1, p: '60% 70%' },
+    18: { u: P1, p: '30% 50%' },
+    21: { u: P1, p: '70% 50%' },
+    24: { u: P1, p: '50% 20%' },
+    51: { u: P1, p: '50% 80%' },
+    27: { u: P1, p: '25% 40%' },
+    36: { u: P1, p: '75% 40%' },
+    1:  { u: P1, p: '35% 60%' },
+    6:  { u: P1, p: '65% 60%' },
+    39: { u: P1, p: '45% 25%' },
+    48: { u: P1, p: '55% 75%' },
+    // ── BEACH theme ───────────────────────────────────────────────
+    10: { u: B1, p: 'center'  },
+    44: { u: B2, p: 'center'  },
+    46: { u: B1, p: '30% 50%' },
+    13: { u: B2, p: '70% 50%' },
+    16: { u: B1, p: '50% 30%' },
+    19: { u: B2, p: '50% 70%' },
+    22: { u: B1, p: '20% 40%' },
+    25: { u: B2, p: '80% 40%' },
+    52: { u: B1, p: '40% 60%' },
+    28: { u: B2, p: '60% 60%' },
+    37: { u: B1, p: '30% 30%' },
+    2:  { u: B2, p: '70% 70%' },
+    5:  { u: B1, p: '40% 40%' },
+    40: { u: B2, p: '60% 40%' },
+    49: { u: B1, p: '25% 30%' },
+  };
+}());
 
 // ── Category display config ───────────────────
 // IMPORTANT: must be declared BEFORE the IIFE below,
@@ -270,17 +277,15 @@ function initNav() {
 }
 
 // ── Shared: product card HTML ─────────────────
-const TWEMOJI_BASE = 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/';
-
 function productCardHTML(p, btnLabel = '+ Add to Basket') {
   const stock   = JSON.parse(localStorage.getItem('tantan_stock')) || {};
   const qty     = stock[p.id] !== undefined ? stock[p.id] : 50;
   const oos     = qty <= 0;
-  const code    = BEACH_IMGS[p.id];
-  const imgHTML = code
-    ? `<img src="${TWEMOJI_BASE}${code}.svg" alt="${p.name}" class="prod-beach-img" loading="lazy"
-           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
-       <span class="prod-emoji-fb" style="display:none">${p.emoji}</span>`
+  const img     = PRODUCT_IMGS[p.id];
+  const imgHTML = img
+    ? `<img src="${img.u}" alt="${p.name}" class="prod-beach-img" loading="lazy"
+           style="object-position:${img.p}"
+           onerror="this.style.display='none'" />`
     : `<span>${p.emoji}</span>`;
   return `
     <div class="product-card${oos ? ' out-of-stock' : ''}">
