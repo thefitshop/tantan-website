@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Owner Dashboard — TanTan</title>
-  <link rel="stylesheet" href="dashboard.css?v=2" />
+  <link rel="stylesheet" href="dashboard.css?v=3" />
 </head>
 <body>
 
@@ -42,6 +42,7 @@
       <button class="dash-tab-btn" data-tab="customers">👥 Customers</button>
       <button class="dash-tab-btn" data-tab="pl">💰 P&amp;L</button>
       <button class="dash-tab-btn" data-tab="products">🏷️ Products</button>
+      <button class="dash-tab-btn" data-tab="popular">📊 Popular</button>
     </nav>
 
     <!-- ── Stock Panel ── -->
@@ -180,9 +181,34 @@
       </div>
     </div>
 
+    <!-- ── Popular Products Panel ── -->
+    <div class="dash-panel" id="panel-popular">
+      <div class="dash-section-header">
+        <h2>📊 Popular Products</h2>
+        <span style="font-size:0.875rem;color:var(--muted)">Based on all orders placed</span>
+      </div>
+      <div id="popular-empty" class="dash-empty" style="display:none">
+        <div class="dash-empty-icon">📊</div>
+        <h3>No orders yet</h3>
+        <p>Popular products will appear here once orders have been placed.</p>
+      </div>
+      <div id="popular-content">
+        <div class="pop-grid">
+          <div class="pop-card pop-card-gold">
+            <div class="pop-card-title">🏆 Top 5 Best Sellers</div>
+            <div id="pop-top5"></div>
+          </div>
+          <div class="pop-card pop-card-blue">
+            <div class="pop-card-title">📉 5 Least Ordered</div>
+            <div id="pop-bot5"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div><!-- /#dash-app -->
 
   <script src="script.js?v=29"></script>
-  <script src="dashboard.js?v=6"></script>
+  <script src="dashboard.js?v=7"></script>
 </body>
 </html>
