@@ -123,11 +123,55 @@
       Your glow. Your way. All year round.
     </p>
 
-    <a href="products.html" class="landing-btn" style="animation-delay:0.38s">
+    <!-- UK confirmation checkbox -->
+    <label class="landing-checkbox-wrap anim-fade" style="animation-delay:0.34s">
+      <input type="checkbox" id="uk-confirm" class="landing-checkbox-input" />
+      <span class="landing-checkbox-box" aria-hidden="true"></span>
+      <span class="landing-checkbox-label">I confirm I am based in the UK</span>
+    </label>
+
+    <!-- Message shown if they click Shop Now without ticking -->
+    <p class="landing-msg" id="uk-msg" aria-live="polite"></p>
+
+    <!-- Shop Now — disabled until checkbox is ticked -->
+    <a href="products.html" class="landing-btn landing-btn-disabled anim-fade"
+       id="shop-now-btn" style="animation-delay:0.46s"
+       aria-disabled="true">
       Shop Now &nbsp;→
     </a>
 
   </main>
+
+  <script>
+    (function () {
+      var checkbox = document.getElementById('uk-confirm');
+      var btn      = document.getElementById('shop-now-btn');
+      var msg      = document.getElementById('uk-msg');
+
+      checkbox.addEventListener('change', function () {
+        if (checkbox.checked) {
+          btn.classList.remove('landing-btn-disabled');
+          btn.removeAttribute('aria-disabled');
+          msg.textContent = '';
+        } else {
+          btn.classList.add('landing-btn-disabled');
+          btn.setAttribute('aria-disabled', 'true');
+        }
+      });
+
+      btn.addEventListener('click', function (e) {
+        if (!checkbox.checked) {
+          e.preventDefault();
+          msg.textContent = 'Please confirm you are based in the UK before continuing.';
+          // Gently shake the checkbox to draw attention
+          var wrap = document.querySelector('.landing-checkbox-wrap');
+          wrap.classList.remove('shake');
+          void wrap.offsetWidth;
+          wrap.classList.add('shake');
+        }
+      });
+    }());
+  </script>
 
   <!-- Bottom warm wave -->
   <div class="landing-wave" aria-hidden="true"></div>
