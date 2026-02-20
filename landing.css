@@ -1,0 +1,350 @@
+/* ── TanTan Landing Page ─────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(
+    150deg,
+    #FFF3D0 0%,
+    #FFE4A0 18%,
+    #FFD070 40%,
+    #F5BE3C 62%,
+    #E8A820 80%,
+    #D49510 100%
+  );
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── Animated background blobs ── */
+.landing-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bg-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.45;
+}
+
+.bg-blob-1 {
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, #FFB347 0%, transparent 70%);
+  top: -280px;
+  left: -200px;
+  animation: drift1 9s ease-in-out infinite alternate;
+}
+
+.bg-blob-2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #FFCB6B 0%, transparent 70%);
+  bottom: -150px;
+  right: -120px;
+  animation: drift2 11s ease-in-out infinite alternate;
+}
+
+.bg-blob-3 {
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, #FFE9AA 0%, transparent 70%);
+  top: 42%;
+  left: 58%;
+  animation: drift3 7.5s ease-in-out infinite alternate;
+}
+
+.bg-blob-4 {
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, #FFA040 0%, transparent 70%);
+  top: 10%;
+  right: 15%;
+  animation: drift1 13s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes drift1 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(50px, 70px) scale(1.05); }
+}
+@keyframes drift2 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-45px, -35px) scale(1.08); }
+}
+@keyframes drift3 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-35px, 50px) scale(0.95); }
+}
+
+/* ── Shimmer particles ── */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.75);
+  animation: sparkle var(--dur, 3s) ease-in-out var(--delay, 0s) infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+  40%       { opacity: 0.9; }
+  50%       { opacity: 1; transform: scale(1) rotate(180deg); }
+}
+
+/* ── Bottom warm wave ── */
+.landing-wave {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  background: linear-gradient(to top, rgba(212, 130, 10, 0.35), transparent);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ── Main content container ── */
+.landing-container {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+/* ── Fade-in animations ── */
+.anim-fade {
+  opacity: 0;
+  animation: fadeInUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Premium badge ── */
+.landing-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 210, 120, 0.6);
+  border-radius: 50px;
+  padding: 0.5rem 1.35rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #6B3D00;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 1.6rem;
+  animation-delay: 0s;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* ── Main logo ── */
+.landing-logo {
+  font-size: clamp(4.5rem, 16vw, 9.5rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -3px;
+  color: #2C1500;
+  margin-bottom: 0.55rem;
+  text-shadow:
+    0 6px 24px rgba(160, 90, 0, 0.22),
+    0 2px 6px rgba(0, 0, 0, 0.10);
+  animation-delay: 0.1s;
+}
+
+.landing-logo em {
+  font-style: normal;
+  background: linear-gradient(135deg, #C97D10 0%, #F5C028 45%, #E8960A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Tagline ── */
+.landing-tagline {
+  font-size: clamp(1.05rem, 3vw, 1.45rem);
+  font-weight: 500;
+  color: #4A2800;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  margin-bottom: 2.8rem;
+  opacity: 0.88;
+  animation-delay: 0.2s;
+}
+
+/* ── Shop Now button ── */
+.landing-btn {
+  display: inline-block;
+  padding: 1.1rem 3.2rem;
+  background: linear-gradient(135deg, #BF6E08, #F5A623, #E8960A, #BF6E08);
+  background-size: 200% 100%;
+  color: #fff;
+  font-size: 1.18rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  border-radius: 60px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 8px 32px rgba(191, 110, 8, 0.55),
+    0 2px 8px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  animation-delay: 0.35s;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background-position 0.4s ease;
+}
+
+/* Shine sweep on the button */
+.landing-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 80%
+  );
+  animation: btn-shine 3s ease-in-out 1.8s infinite;
+}
+
+@keyframes btn-shine {
+  0%   { left: -100%; }
+  50%  { left: 130%; }
+  100% { left: 130%; }
+}
+
+/* Glow pulse */
+.landing-btn {
+  animation-delay: 0.35s, 2s;
+  animation-name: fadeInUp, glow-pulse;
+  animation-duration: 0.9s, 3s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1), ease-in-out;
+  animation-fill-mode: forwards, none;
+  animation-iteration-count: 1, infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow:
+      0 8px 32px rgba(191, 110, 8, 0.55),
+      0 2px 8px rgba(0, 0, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  }
+  50% {
+    box-shadow:
+      0 8px 55px rgba(245, 166, 35, 0.80),
+      0 2px 8px rgba(0, 0, 0, 0.14),
+      inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  }
+}
+
+.landing-btn:hover {
+  transform: translateY(-3px) scale(1.04);
+  background-position: 100% 0;
+  box-shadow:
+    0 14px 48px rgba(191, 110, 8, 0.65),
+    0 4px 14px rgba(0, 0, 0, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+
+.landing-btn:active {
+  transform: translateY(-1px) scale(1.01);
+}
+
+/* ── Decorative sun lines ── */
+.sun-ring {
+  position: fixed;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 210, 100, 0.25);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sun-ring-1 {
+  width: 480px;
+  height: 480px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: ring-pulse 5s ease-in-out infinite;
+}
+
+.sun-ring-2 {
+  width: 700px;
+  height: 700px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: ring-pulse 5s ease-in-out 1s infinite;
+}
+
+.sun-ring-3 {
+  width: 950px;
+  height: 950px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: ring-pulse 5s ease-in-out 2s infinite;
+}
+
+@keyframes ring-pulse {
+  0%, 100% { opacity: 0.15; transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: 0.40; transform: translate(-50%, -50%) scale(1.03); }
+}
+
+/* ── Mobile ── */
+@media (max-width: 480px) {
+  .landing-logo {
+    letter-spacing: -2px;
+  }
+
+  .landing-btn {
+    padding: 1rem 2.4rem;
+    font-size: 1.05rem;
+  }
+
+  .landing-tagline {
+    font-size: 1rem;
+    margin-bottom: 2.2rem;
+  }
+
+  .sun-ring-2,
+  .sun-ring-3 {
+    display: none;
+  }
+}
+
+@media (max-width: 360px) {
+  .landing-badge {
+    font-size: 0.70rem;
+    padding: 0.4rem 1rem;
+  }
+}
