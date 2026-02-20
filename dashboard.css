@@ -205,6 +205,27 @@ a { text-decoration: none; color: inherit; }
   background: var(--cream);
 }
 .prod-name-input:focus { outline: none; border-color: var(--golden); }
+.delete-prod-btn {
+  background: none; border: none;
+  font-size: 1rem; cursor: pointer;
+  padding: 0.2rem 0.4rem; border-radius: 4px;
+  opacity: 0.55; transition: opacity 0.2s, background 0.2s;
+}
+.delete-prod-btn:hover { opacity: 1; background: #fed7d7; }
+.prod-cat-select {
+  padding: 0.35rem 0.5rem;
+  border: 1.5px solid var(--sand);
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-family: inherit;
+  background: var(--cream);
+  color: var(--text);
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+  max-width: 180px;
+}
+.prod-cat-select:focus { border-color: var(--golden); }
 .prod-cat-header {
   background: var(--sand-light); font-weight: 700;
   font-size: 0.76rem; text-transform: uppercase;

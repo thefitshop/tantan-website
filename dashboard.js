@@ -473,21 +473,29 @@ function renderProducts() {
   const overrides = getProductOverrides();
   const rows      = [];
 
+  const catOptions = CAT_ORDER.map(function (c) {
+    return `<option value="${c}">${c}</option>`;
+  }).join('');
+
   CAT_ORDER.forEach(function (cat) {
     const prods = PRODUCTS.filter(function (p) { return p.cat === cat; });
     if (!prods.length) return;
-    rows.push(`<tr><td colspan="5" class="prod-cat-header">${cat}</td></tr>`);
+    rows.push(`<tr><td colspan="6" class="prod-cat-header">${cat}</td></tr>`);
     prods.forEach(function (p) {
       const isModified = !!overrides[p.id];
       const safeName   = p.name.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+      const catOpts    = CAT_ORDER.map(function (c) {
+        return `<option value="${c}"${c === p.cat ? ' selected' : ''}>${c}</option>`;
+      }).join('');
       rows.push(`<tr data-prod-id="${p.id}">
-        <td style="color:var(--muted);font-size:0.82rem;padding-left:1.5rem">${p.cat}</td>
+        <td><select class="prod-cat-select">${catOpts}</select></td>
         <td><input class="prod-name-input" type="text"   value="${safeName}" /></td>
         <td><input class="cost-input"      type="number" min="0" step="0.01" value="${p.price.toFixed(2)}" /></td>
         <td class="prod-status">${isModified
           ? '<span class="badge badge-warn">Modified</span>'
           : '<span style="color:var(--muted);font-size:0.78rem">Default</span>'}</td>
         <td><button class="update-btn">Save</button></td>
+        <td><button class="delete-prod-btn" title="Delete product">🗑️</button></td>
       </tr>`);
     });
   });
@@ -496,6 +504,30 @@ function renderProducts() {
 
   // FIX: use tbody.onclick (single assignment) — no listener accumulation
   tbody.onclick = function (e) {
+    // ── Delete product ──
+    const delBtn = e.target.closest('.delete-prod-btn');
+    if (delBtn) {
+      const row = delBtn.closest('tr[data-prod-id]');
+      if (!row) return;
+      const id = +row.dataset.prodId;
+      const p  = PRODUCTS.find(function (x) { return x.id === id; });
+      const label = p ? p.name : 'this product';
+      if (!confirm('Delete "' + label + '"? This cannot be undone.')) return;
+      // Remove from in-memory PRODUCTS array
+      const idx = PRODUCTS.findIndex(function (x) { return x.id === id; });
+      if (idx !== -1) PRODUCTS.splice(idx, 1);
+      // Remove from overrides
+      const ov = getProductOverrides();
+      delete ov[id];
+      saveProductOverrides(ov);
+      // Mark as deleted so script.js doesn't re-add it on page reload
+      const deleted = JSON.parse(localStorage.getItem('tantan_deleted_products')) || [];
+      if (!deleted.includes(id)) deleted.push(id);
+      localStorage.setItem('tantan_deleted_products', JSON.stringify(deleted));
+      renderProducts();
+      return;
+    }
+
     const btn = e.target.closest('.update-btn');
     if (!btn) return;
     const row = btn.closest('tr[data-prod-id]');
@@ -505,14 +537,16 @@ function renderProducts() {
     if (!p) return;
     const newName    = row.querySelector('.prod-name-input').value.trim() || p.name;
     const newPrice   = Math.max(0, parseFloat(row.querySelector('.cost-input').value) || 0);
+    const newCat     = row.querySelector('.prod-cat-select').value;
 
-    // Update in-memory PRODUCTS so P&L reflects the change
+    // Update in-memory PRODUCTS so changes reflect immediately
     p.name  = newName;
     p.price = newPrice;
+    p.cat   = newCat;
 
     // Persist override to localStorage
     const ov = getProductOverrides();
-    ov[id] = { name: newName, price: newPrice };
+    ov[id] = { name: newName, price: newPrice, cat: newCat };
     saveProductOverrides(ov);
 
     const statusCell = row.querySelector('.prod-status');
@@ -530,9 +564,11 @@ function renderProducts() {
       if (!p) return;
       const newName  = row.querySelector('.prod-name-input').value.trim() || p.name;
       const newPrice = Math.max(0, parseFloat(row.querySelector('.cost-input').value) || 0);
+      const newCat   = row.querySelector('.prod-cat-select').value;
       p.name  = newName;
       p.price = newPrice;
-      ov[id]  = { name: newName, price: newPrice };
+      p.cat   = newCat;
+      ov[id]  = { name: newName, price: newPrice, cat: newCat };
       const statusCell = row.querySelector('.prod-status');
       if (statusCell) statusCell.innerHTML = '<span class="badge badge-warn">Modified</span>';
     });

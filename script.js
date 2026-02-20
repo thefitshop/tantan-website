@@ -71,13 +71,20 @@ const PRODUCTS = [
 
 ];
 
-// ── Apply dashboard product overrides ────────
+// ── Apply dashboard product overrides & deletions ────────
 (function () {
-  const ov = JSON.parse(localStorage.getItem('tantan_product_overrides')) || {};
+  const ov      = JSON.parse(localStorage.getItem('tantan_product_overrides')) || {};
+  const deleted = JSON.parse(localStorage.getItem('tantan_deleted_products'))  || [];
+  // Remove deleted products from the array (splice in reverse to keep indices safe)
+  for (let i = PRODUCTS.length - 1; i >= 0; i--) {
+    if (deleted.includes(PRODUCTS[i].id)) PRODUCTS.splice(i, 1);
+  }
+  // Apply name / price / category overrides
   PRODUCTS.forEach(function (p) {
     if (ov[p.id]) {
       if (ov[p.id].name  !== undefined) p.name  = ov[p.id].name;
       if (ov[p.id].price !== undefined) p.price = ov[p.id].price;
+      if (ov[p.id].cat   !== undefined) p.cat   = ov[p.id].cat;
     }
   });
 }());
