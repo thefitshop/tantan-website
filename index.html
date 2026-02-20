@@ -8,17 +8,6 @@
 
   <link rel="stylesheet" href="landing.css" />
 
-  <!-- ── Skip landing page if customer has already confirmed UK ── -->
-  <script>
-    (function () {
-      try {
-        if (localStorage.getItem('tantan_uk_confirmed') === 'yes') {
-          window.location.replace('home.html');
-        }
-      } catch (e) {}
-    }());
-  </script>
-
   <!-- ── Bot & crawler detection — runs before anything renders ── -->
   <script>
     (function () {
@@ -179,9 +168,6 @@
           wrap.classList.remove('shake');
           void wrap.offsetWidth;
           wrap.classList.add('shake');
-        } else {
-          // Mark as confirmed so the landing page is skipped on future visits
-          try { localStorage.setItem('tantan_uk_confirmed', 'yes'); } catch (e) {}
         }
       });
     }());
