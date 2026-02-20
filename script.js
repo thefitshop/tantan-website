@@ -63,6 +63,11 @@ const PRODUCTS = [
   { id: 37, cat: 'Tanning Foam', name: 'Tanning Foam Medium', emoji: '🫧', grad: 'gspm', price: 21.99, desc: 'Our velvety medium tanning foam strikes the perfect balance — rich enough for a stunning bronze, light enough to feel like nothing on skin. Develops beautifully in 2–4 hours.' },
   { id: 38, cat: 'Tanning Foam', name: 'Tanning Foam Dark',   emoji: '🫧', grad: 'gspd', price: 23.99, desc: 'Luxuriously rich dark tanning foam for a bold, deep bronze. Packed with colour-boosting DHA and moisturising aloe vera, it develops into a dramatic, long-lasting tan in just 1–2 hours.' },
 
+  // ── Tanning Mitts ──
+  { id: 39, cat: 'Tanning Mitts', name: 'Tanning Mitt Small',  emoji: '🧤', grad: 'g7', price: 15.00, desc: 'Our compact small mitt is perfect for precise application on hard-to-reach areas like the face, hands and ankles. Soft velvet finish ensures a seamless, streak-free result every time.' },
+  { id: 40, cat: 'Tanning Mitts', name: 'Tanning Mitt Medium', emoji: '🧤', grad: 'g7', price: 15.00, desc: 'The everyday essential. Our medium mitt fits most hands perfectly and glides product on evenly across arms, legs and the torso — your go-to for a flawless, professional-looking tan.' },
+  { id: 41, cat: 'Tanning Mitts', name: 'Tanning Mitt Large',  emoji: '🧤', grad: 'g7', price: 15.00, desc: 'Cover more skin in less time with our generously sized large mitt. Ideal for quickly and evenly applying tanning product across the back, stomach and legs for a salon-quality finish at home.' },
+
   // ── Accessories ──
   { id: 7, cat: 'Accessories', name: 'Tanning Mitt', emoji: '🧤', grad: 'g7', price: 9.99, desc: 'Premium double-sided velvet applicator for a perfectly streak-free finish.' },
 ];
@@ -79,6 +84,7 @@ const CAT_ORDER = [
   'Tanning Foam',
   'Self Tans',
   'Skincare',
+  'Tanning Mitts',
   'Accessories',
 ];
 
@@ -93,6 +99,7 @@ const CAT_ICONS = {
   'Tanning Foam':       '🫧',
   'Self Tans':          '🌟',
   'Skincare':           '🌸',
+  'Tanning Mitts':      '🧤',
   'Accessories':        '🧤',
 };
 
