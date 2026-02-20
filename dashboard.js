@@ -13,6 +13,12 @@ const STOCK_KEY             = 'tantan_stock';
 const COSTS_KEY             = 'tantan_costs';
 const STATUS_KEY            = 'tantan_order_statuses';
 const PRODUCT_OVERRIDES_KEY = 'tantan_product_overrides';
+const STATUS_OPTIONS = [
+  { value: 'pending',    label: '🕐 Pending'    },
+  { value: 'processing', label: '⚙️ Processing' },
+  { value: 'dispatched', label: '🚚 Dispatched' },
+  { value: 'delivered',  label: '✅ Delivered'  },
+];
 
 // ── Helpers ──────────────────────────────────
 function fmt(n) { return '£' + Number(n || 0).toFixed(2); }
@@ -182,12 +188,6 @@ function renderStock() {
 // ══════════════════════════════════════════════
 //  ORDERS
 // ══════════════════════════════════════════════
-const STATUS_OPTIONS = [
-  { value: 'pending',    label: '🕐 Pending'    },
-  { value: 'processing', label: '⚙️ Processing' },
-  { value: 'dispatched', label: '🚚 Dispatched' },
-  { value: 'delivered',  label: '✅ Delivered'  },
-];
 
 function renderOrders() {
   const orders   = getOrders().slice().reverse();
