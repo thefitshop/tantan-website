@@ -224,6 +224,7 @@ nav {
 }
 .social-btn.facebook  { background: #1877f2; }
 .social-btn.tiktok    { background: #010101; border: 1px solid rgba(255,255,255,0.2); }
+.social-btn.telegram  { background: #2aabee; }
 
 /* ============================================
    PAGE HERO (inner pages)
@@ -514,6 +515,7 @@ footer {
 .fsoc.ig { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
 .fsoc.fb { background: #1877f2; }
 .fsoc.tt { background: #1a1a1a; border: 1px solid rgba(255,255,255,0.12); }
+.fsoc.tg { background: #2aabee; }
 
 .footer-bottom {
   border-top: 1px solid rgba(255,253,247,0.1);
