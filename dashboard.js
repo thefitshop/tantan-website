@@ -13,6 +13,9 @@ const STOCK_KEY             = 'tantan_stock';
 const COSTS_KEY             = 'tantan_costs';
 const STATUS_KEY            = 'tantan_order_statuses';
 const PRODUCT_OVERRIDES_KEY = 'tantan_product_overrides';
+const CAT_NAMES_KEY         = 'tantan_cat_names';
+const ADDED_PRODS_KEY       = 'tantan_added_products';
+const DELETED_PRODS_KEY     = 'tantan_deleted_products';
 const STATUS_OPTIONS = [
   { value: 'pending',    label: '🕐 Pending'    },
   { value: 'processing', label: '⚙️ Processing' },
@@ -28,6 +31,10 @@ function getStatuses(){ return JSON.parse(localStorage.getItem(STATUS_KEY))   ||
 function saveStatuses(s){ localStorage.setItem(STATUS_KEY, JSON.stringify(s)); }
 function getProductOverrides()  { return JSON.parse(localStorage.getItem(PRODUCT_OVERRIDES_KEY)) || {}; }
 function saveProductOverrides(o){ localStorage.setItem(PRODUCT_OVERRIDES_KEY, JSON.stringify(o)); }
+function getCatNames()          { return JSON.parse(localStorage.getItem(CAT_NAMES_KEY))   || {}; }
+function saveCatNames(n)        { localStorage.setItem(CAT_NAMES_KEY, JSON.stringify(n)); }
+function getAddedProducts()     { return JSON.parse(localStorage.getItem(ADDED_PRODS_KEY)) || []; }
+function saveAddedProducts(a)   { localStorage.setItem(ADDED_PRODS_KEY, JSON.stringify(a)); }
 
 function getStock() {
   const saved = JSON.parse(localStorage.getItem(STOCK_KEY)) || {};
@@ -99,6 +106,8 @@ function initDashboard() {
   renderPL();
   renderProducts();
   renderPopular();
+  renderCategoryEditor();
+  initAddProductForm();
 }
 
 // ══════════════════════════════════════════════
@@ -520,11 +529,14 @@ function renderProducts() {
       const ov = getProductOverrides();
       delete ov[id];
       saveProductOverrides(ov);
+      // Remove from added products list (if it was a user-added product)
+      saveAddedProducts(getAddedProducts().filter(function (ap) { return ap.id !== id; }));
       // Mark as deleted so script.js doesn't re-add it on page reload
-      const deleted = JSON.parse(localStorage.getItem('tantan_deleted_products')) || [];
+      const deleted = JSON.parse(localStorage.getItem(DELETED_PRODS_KEY)) || [];
       if (!deleted.includes(id)) deleted.push(id);
-      localStorage.setItem('tantan_deleted_products', JSON.stringify(deleted));
+      localStorage.setItem(DELETED_PRODS_KEY, JSON.stringify(deleted));
       renderProducts();
+      renderPopular();
       return;
     }
 
@@ -637,4 +649,133 @@ function renderPopular() {
 
   document.getElementById('pop-top5').innerHTML = buildBars(top5, 'pop-fill-gold');
   document.getElementById('pop-bot5').innerHTML = buildBars(bot5, 'pop-fill-blue');
+}
+
+// ══════════════════════════════════════════════
+//  CATEGORY NAME EDITOR
+// ══════════════════════════════════════════════
+function renderCategoryEditor() {
+  const grid = document.getElementById('cat-names-grid');
+  if (!grid) return;
+
+  grid.innerHTML = CAT_ORDER.map(function (cat) {
+    const safe = cat.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+    return `<div class="cat-name-row">
+      <span class="cat-name-current">${cat}</span>
+      <input class="prod-name-input cat-name-input" type="text" value="${safe}" />
+      <button class="update-btn">Rename</button>
+    </div>`;
+  }).join('');
+
+  grid.onclick = function (e) {
+    const btn = e.target.closest('.update-btn');
+    if (!btn) return;
+    const row     = btn.closest('.cat-name-row');
+    const current = row.querySelector('.cat-name-current').textContent;
+    const newName = row.querySelector('.cat-name-input').value.trim();
+
+    if (!newName || newName === current) {
+      btn.textContent = 'No change';
+      setTimeout(function () { btn.textContent = 'Rename'; }, 1500);
+      return;
+    }
+
+    // Find the original (built-in) key that currently maps to this display name,
+    // so chain renames always update a single entry instead of stacking.
+    const catNames = getCatNames();
+    let origKey = current;
+    Object.keys(catNames).forEach(function (k) {
+      if (catNames[k] === current) origKey = k;
+    });
+    catNames[origKey] = newName;
+    saveCatNames(catNames);
+
+    // Apply in-memory so rest of dashboard updates immediately
+    const idx = CAT_ORDER.indexOf(current);
+    if (idx !== -1) CAT_ORDER[idx] = newName;
+    PRODUCTS.forEach(function (p) { if (p.cat === current) p.cat = newName; });
+    if (typeof CAT_ICONS !== 'undefined' && CAT_ICONS[current] !== undefined) {
+      CAT_ICONS[newName] = CAT_ICONS[current];
+    }
+
+    // Refresh the add-product category dropdown if it exists
+    var catSel = document.getElementById('new-prod-cat');
+    if (catSel) {
+      catSel.innerHTML = CAT_ORDER.map(function (c) {
+        return `<option value="${c}">${c}</option>`;
+      }).join('');
+    }
+
+    btn.textContent = '✅ Renamed!';
+    setTimeout(function () { renderCategoryEditor(); renderProducts(); }, 800);
+  };
+}
+
+// ══════════════════════════════════════════════
+//  ADD NEW PRODUCT
+// ══════════════════════════════════════════════
+function initAddProductForm() {
+  const toggleBtn = document.getElementById('add-prod-toggle');
+  const form      = document.getElementById('add-prod-form');
+  const catSelect = document.getElementById('new-prod-cat');
+  const submitBtn = document.getElementById('add-prod-submit');
+  const errorEl   = document.getElementById('add-prod-error');
+  if (!toggleBtn || !form) return;
+
+  // Populate category dropdown with current categories
+  catSelect.innerHTML = CAT_ORDER.map(function (c) {
+    return `<option value="${c}">${c}</option>`;
+  }).join('');
+
+  toggleBtn.onclick = function () {
+    const isOpen = form.style.display !== 'none';
+    form.style.display    = isOpen ? 'none' : 'block';
+    toggleBtn.textContent = isOpen ? '＋ New Product' : '✕ Cancel';
+  };
+
+  submitBtn.onclick = function () {
+    errorEl.textContent = '';
+    const name  = document.getElementById('new-prod-name').value.trim();
+    const cat   = catSelect.value;
+    const price = parseFloat(document.getElementById('new-prod-price').value);
+    const desc  = document.getElementById('new-prod-desc').value.trim();
+    const emoji = document.getElementById('new-prod-emoji').value.trim() || '✨';
+    const grad  = document.getElementById('new-prod-grad').value;
+
+    if (!name)              { errorEl.textContent = 'Please enter a product name.';   return; }
+    if (!cat)               { errorEl.textContent = 'Please select a category.';      return; }
+    if (isNaN(price) || price < 0) { errorEl.textContent = 'Please enter a valid price.'; return; }
+    if (!desc)              { errorEl.textContent = 'Please enter a description.';    return; }
+
+    const newProd = {
+      id:    Date.now(),
+      cat:   cat,
+      name:  name,
+      emoji: emoji,
+      grad:  grad,
+      price: price,
+      desc:  desc
+    };
+
+    // Save to localStorage and push into live PRODUCTS array
+    const added = getAddedProducts();
+    added.push(newProd);
+    saveAddedProducts(added);
+    PRODUCTS.push(newProd);
+
+    // Reset form fields
+    document.getElementById('new-prod-name').value  = '';
+    document.getElementById('new-prod-price').value = '';
+    document.getElementById('new-prod-desc').value  = '';
+    document.getElementById('new-prod-emoji').value = '';
+    form.style.display    = 'none';
+    toggleBtn.textContent = '＋ New Product';
+
+    submitBtn.textContent = '✅ Product Added!';
+    setTimeout(function () {
+      submitBtn.textContent = '+ Add Product';
+      renderProducts();
+      renderPopular();
+    }, 800);
+  };
 }

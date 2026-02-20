@@ -205,6 +205,57 @@ a { text-decoration: none; color: inherit; }
   background: var(--cream);
 }
 .prod-name-input:focus { outline: none; border-color: var(--golden); }
+/* ── Product Management Cards (cat editor + add form) ── */
+.prod-mgmt-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1.5rem;
+}
+.prod-mgmt-card-header {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 0.75rem;
+}
+.prod-mgmt-card-title {
+  font-size: 0.9rem; font-weight: 800; color: var(--dark);
+  text-transform: uppercase; letter-spacing: 0.04em;
+}
+.cat-name-row {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.5rem 0; border-bottom: 1px solid var(--sand-light);
+}
+.cat-name-row:last-child { border-bottom: none; }
+.cat-name-current {
+  font-size: 0.85rem; font-weight: 600; color: var(--dark);
+  min-width: 180px;
+}
+.cat-name-input { width: 200px; }
+.add-prod-grid {
+  display: grid; grid-template-columns: 1fr 1fr 140px 80px; gap: 0.75rem;
+}
+.add-prod-field { display: flex; flex-direction: column; gap: 0.3rem; }
+.dash-field-label {
+  font-size: 0.76rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.04em; color: var(--muted);
+}
+.dash-field-input {
+  padding: 0.45rem 0.65rem;
+  border: 1.5px solid var(--sand); border-radius: 6px;
+  font-size: 0.875rem; font-family: inherit;
+  background: var(--cream); color: var(--text);
+  outline: none; transition: border-color 0.2s;
+}
+.dash-field-input:focus { border-color: var(--golden); }
+.dash-field-textarea {
+  padding: 0.45rem 0.65rem;
+  border: 1.5px solid var(--sand); border-radius: 6px;
+  font-size: 0.875rem; font-family: inherit; resize: vertical;
+  background: var(--cream); color: var(--text);
+  outline: none; transition: border-color 0.2s; width: 100%;
+}
+.dash-field-textarea:focus { border-color: var(--golden); }
+
 .delete-prod-btn {
   background: none; border: none;
   font-size: 1rem; cursor: pointer;
@@ -338,5 +389,8 @@ a { text-decoration: none; color: inherit; }
   .dash-tab-btn { padding: 0.8rem 0.7rem; font-size: 0.8rem; }
   .pl-cards     { grid-template-columns: 1fr 1fr; }
   .dash-section-header { flex-direction: column; align-items: flex-start; }
-  .pop-grid     { grid-template-columns: 1fr; }
+  .pop-grid       { grid-template-columns: 1fr; }
+  .add-prod-grid  { grid-template-columns: 1fr 1fr; }
+  .cat-name-current { min-width: 120px; }
+  .cat-name-input { width: 100%; }
 }
