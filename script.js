@@ -184,15 +184,20 @@ function initNav() {
 
 // ── Shared: product card HTML ─────────────────
 function productCardHTML(p, btnLabel = '+ Add to Basket') {
+  const stock = JSON.parse(localStorage.getItem('tantan_stock')) || {};
+  const qty   = stock[p.id] !== undefined ? stock[p.id] : 50;
+  const oos   = qty <= 0;
   return `
-    <div class="product-card">
+    <div class="product-card${oos ? ' out-of-stock' : ''}">
       <div class="product-img ${p.grad}">${p.emoji}</div>
       <div class="product-body">
         <div class="product-name">${p.name}</div>
         <div class="product-desc">${p.desc}</div>
         <div class="product-footer">
           <div class="product-price">${fmt(p.price)}</div>
-          <button class="add-btn" data-id="${p.id}">${btnLabel}</button>
+          ${oos
+            ? '<span class="oos-badge">Out of Stock</span>'
+            : `<button class="add-btn" data-id="${p.id}">${btnLabel}</button>`}
         </div>
       </div>
     </div>`;
@@ -202,7 +207,10 @@ function attachAddHandlers(container, btnLabel) {
   container.addEventListener('click', e => {
     const btn = e.target.closest('.add-btn');
     if (!btn) return;
-    const id = +btn.dataset.id;
+    const id    = +btn.dataset.id;
+    const stock = JSON.parse(localStorage.getItem('tantan_stock')) || {};
+    const qty   = stock[id] !== undefined ? stock[id] : 50;
+    if (qty <= 0) { showToast('Sorry, this product is out of stock'); return; }
     addToBasket(id);
     const p = PRODUCTS.find(x => x.id === id);
     showToast(`✓ ${p.name} added to basket`);

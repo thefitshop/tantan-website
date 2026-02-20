@@ -111,7 +111,8 @@ function renderStock() {
     const qty  = stock[p.id];
     const cost = costs[p.id];
     let badge;
-    if (qty <= 5)       badge = `<span class="badge badge-danger">Critical — ${qty}</span>`;
+    if (qty === 0)      badge = `<span class="badge badge-danger">Out of Stock</span>`;
+    else if (qty <= 5)  badge = `<span class="badge badge-danger">Critical — ${qty}</span>`;
     else if (qty <= 10) badge = `<span class="badge badge-warn">Low — ${qty}</span>`;
     else                badge = `<span class="badge badge-ok">OK — ${qty}</span>`;
 

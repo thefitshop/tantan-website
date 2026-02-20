@@ -328,6 +328,17 @@ nav {
 .add-btn:hover   { background: var(--golden-dark); transform: scale(1.04); }
 .add-btn.confirm { background: #2e7d32; }
 
+/* ── Out of Stock ── */
+.product-card.out-of-stock { opacity: 0.7; }
+.product-card.out-of-stock .product-img { filter: grayscale(50%); }
+.oos-badge {
+  display: inline-flex; align-items: center;
+  padding: 0.45rem 1rem;
+  background: #fff5f5; color: #c53030;
+  border: 1.5px solid #fed7d7; border-radius: var(--radius-sm);
+  font-size: 0.82rem; font-weight: 700; white-space: nowrap;
+}
+
 /* ============================================
    TOAST
    ============================================ */
