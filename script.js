@@ -277,14 +277,14 @@ function renderBasket() {
   `).join('');
 
   const subtotal = basketTotal();
-  const delivery = subtotal >= 30 ? 0 : 3.99;
+  const delivery = 3.99;
   const total    = subtotal + delivery;
 
   const subEl = document.getElementById('sum-subtotal');
   const delEl = document.getElementById('sum-delivery');
   const totEl = document.getElementById('sum-total');
   if (subEl) subEl.textContent = fmt(subtotal);
-  if (delEl) { delEl.textContent = delivery === 0 ? 'FREE' : fmt(delivery); delEl.className = delivery === 0 ? 'free-delivery' : ''; }
+  if (delEl) delEl.textContent = fmt(delivery);
   if (totEl) totEl.textContent = fmt(total);
 }
 
@@ -318,7 +318,7 @@ function initCheckout() {
 
   const basket   = getBasket();
   const subtotal = basketTotal();
-  const delivery = subtotal >= 30 ? 0 : 3.99;
+  const delivery = 3.99;
   const total    = subtotal + delivery;
 
   if (coList) {
@@ -334,7 +334,7 @@ function initCheckout() {
           </div>`).join('');
   }
   if (coSub) coSub.textContent = fmt(subtotal);
-  if (coDel) { coDel.textContent = delivery === 0 ? 'FREE' : fmt(delivery); coDel.className = delivery === 0 ? 'free-delivery' : ''; }
+  if (coDel) coDel.textContent = fmt(delivery);
   if (coTot) coTot.textContent = fmt(total);
 
   const payOptions = document.querySelectorAll('.pay-option');
