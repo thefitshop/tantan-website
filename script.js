@@ -71,6 +71,66 @@ const PRODUCTS = [
 
 ];
 
+// ── Beach-themed Twemoji image per product ────
+// Each value is the Twemoji codepoint (jsDelivr CDN, no API key needed).
+// Every product has a unique image — beach, sun, ocean and tropical themes.
+const BEACH_IMGS = {
+  // Self Tans
+  1:  '1f305',  // 🌅 sunrise
+  2:  '1f30a',  // 🌊 wave
+  4:  '2600',   // ☀️ sun
+  6:  '1f31e',  // 🌞 sun with face
+  // Tanning Oils
+  3:  '1f334',  // 🌴 palm tree
+  9:  '1f33a',  // 🌺 hibiscus
+  10: '1f33b',  // 🌻 sunflower
+  11: '1f3d6',  // 🏖️ beach with umbrella
+  12: '1f3dd',  // 🏝️ desert island
+  44: '1f304',  // 🌄 sunrise over mountains
+  45: '1f307',  // 🌇 city at sunset
+  47: '26f1',   // ⛱️ umbrella on ground
+  46: '1f3c4',  // 🏄 surfer
+  42: '1f9a9',  // 🦩 flamingo
+  43: '1f41a',  // 🐚 spiral shell
+  // Aerosol Tans
+  13: '1f338',  // 🌸 cherry blossom
+  14: '1f379',  // 🍹 tropical drink
+  15: '1f98b',  // 🦋 butterfly
+  16: '1f420',  // 🐠 tropical fish
+  // Spray Tan Solution
+  17: '1f324',  // 🌤️ sun behind cloud
+  18: '1f31f',  // 🌟 glowing star
+  19: '1f306',  // 🌆 city at dusk
+  // Tanning Gel
+  20: '1f337',  // 🌷 tulip
+  21: '1f33c',  // 🌼 blossom
+  22: '1f965',  // 🥥 coconut
+  23: '1f980',  // 🦀 crab
+  24: '1f308',  // 🌈 rainbow
+  25: '1f99e',  // 🦞 lobster
+  50: '1f421',  // 🐡 blowfish
+  51: '1f42c',  // 🐬 dolphin
+  52: '1f422',  // 🐢 turtle
+  // Skincare
+  5:  '26c5',   // ⛅ partly cloudy
+  8:  '1f99c',  // 🦜 parrot
+  // Self Tanning Drops
+  26: '2728',   // ✨ sparkles
+  27: '1f4ab',  // 💫 dizzy star
+  28: '2693',   // ⚓ anchor
+  29: '26f5',   // ⛵ sailboat
+  // Tanning Foam
+  36: '1f33f',  // 🌿 herb / tropical leaf
+  37: '1f419',  // 🐙 octopus
+  38: '1f988',  // 🦈 shark
+  // Tanning Mitts
+  39: '1f3a1',  // 🎡 ferris wheel (beach carnival)
+  40: '1f33e',  // 🌾 tropical reeds
+  41: '1f6a4',  // 🚤 speedboat
+  48: '1f3ca',  // 🏊 swimmer
+  49: '1f320',  // 🌠 shooting star
+};
+
 // ── Category display config ───────────────────
 // IMPORTANT: must be declared BEFORE the IIFE below,
 // which reads and mutates these arrays at runtime.
@@ -210,13 +270,21 @@ function initNav() {
 }
 
 // ── Shared: product card HTML ─────────────────
+const TWEMOJI_BASE = 'https://cdn.jsdelivr.net/npm/twemoji@14.0.2/assets/svg/';
+
 function productCardHTML(p, btnLabel = '+ Add to Basket') {
-  const stock = JSON.parse(localStorage.getItem('tantan_stock')) || {};
-  const qty   = stock[p.id] !== undefined ? stock[p.id] : 50;
-  const oos   = qty <= 0;
+  const stock   = JSON.parse(localStorage.getItem('tantan_stock')) || {};
+  const qty     = stock[p.id] !== undefined ? stock[p.id] : 50;
+  const oos     = qty <= 0;
+  const code    = BEACH_IMGS[p.id];
+  const imgHTML = code
+    ? `<img src="${TWEMOJI_BASE}${code}.svg" alt="${p.name}" class="prod-beach-img" loading="lazy"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+       <span class="prod-emoji-fb" style="display:none">${p.emoji}</span>`
+    : `<span>${p.emoji}</span>`;
   return `
     <div class="product-card${oos ? ' out-of-stock' : ''}">
-      <div class="product-img ${p.grad}">${p.emoji}</div>
+      <div class="product-img ${p.grad}">${imgHTML}</div>
       <div class="product-body">
         <div class="product-name">${p.name}</div>
         <div class="product-desc">${p.desc}</div>
