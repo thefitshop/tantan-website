@@ -86,6 +86,7 @@ function initDashboard() {
   renderOrders();
   renderCustomers();
   renderPL();
+  renderProducts();
 }
 
 // ── Stock ─────────────────────────────────────
@@ -341,4 +342,88 @@ function renderPL() {
       <td style="font-weight:700;color:${pft >= 0 ? 'var(--success)' : 'var(--danger)'}">${fmt(pft)}</td>
     </tr>`;
   }).join('');
+}
+
+// ── Products ──────────────────────────────────
+const PRODUCT_OVERRIDES_KEY = 'tantan_product_overrides';
+function getProductOverrides()  { return JSON.parse(localStorage.getItem(PRODUCT_OVERRIDES_KEY)) || {}; }
+function saveProductOverrides(o){ localStorage.setItem(PRODUCT_OVERRIDES_KEY, JSON.stringify(o)); }
+
+function renderProducts() {
+  const tbody     = document.getElementById('products-tbody');
+  const overrides = getProductOverrides();
+  const rows      = [];
+
+  CAT_ORDER.forEach(cat => {
+    const prods = PRODUCTS.filter(p => p.cat === cat);
+    if (!prods.length) return;
+    rows.push(`<tr><td colspan="5" class="prod-cat-header">${cat}</td></tr>`);
+    prods.forEach(p => {
+      const isModified = !!overrides[p.id];
+      const safeName   = p.name.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+      rows.push(`<tr>
+        <td></td>
+        <td><input class="prod-name-input" type="text" value="${safeName}" data-id="${p.id}" data-field="name" /></td>
+        <td><input class="cost-input" type="number" min="0" step="0.01" value="${p.price.toFixed(2)}" data-id="${p.id}" data-field="price" /></td>
+        <td class="prod-status">${isModified ? '<span class="badge badge-warn">Modified</span>' : '<span style="color:var(--muted);font-size:0.78rem">Default</span>'}</td>
+        <td><button class="update-btn" data-prod-update="${p.id}">Save</button></td>
+      </tr>`);
+    });
+  });
+
+  tbody.innerHTML = rows.join('');
+
+  // Per-row save
+  tbody.addEventListener('click', e => {
+    const btn = e.target.closest('[data-prod-update]');
+    if (!btn) return;
+    const id         = +btn.dataset.prodUpdate;
+    const p          = PRODUCTS.find(x => x.id === id);
+    if (!p) return;
+    const row        = btn.closest('tr');
+    const nameInput  = row.querySelector('input[data-field="name"]');
+    const priceInput = row.querySelector('input[data-field="price"]');
+    const newName    = nameInput.value.trim() || p.name;
+    const newPrice   = Math.max(0, parseFloat(priceInput.value) || 0);
+
+    // Update in-memory PRODUCTS so P&L tab reflects change
+    p.name  = newName;
+    p.price = newPrice;
+
+    // Persist to localStorage
+    const ov = getProductOverrides();
+    ov[id] = { name: newName, price: newPrice };
+    saveProductOverrides(ov);
+
+    // Inline feedback
+    const statusCell = row.querySelector('.prod-status');
+    if (statusCell) statusCell.innerHTML = '<span class="badge badge-warn">Modified</span>';
+    btn.textContent = '✅ Saved!';
+    setTimeout(() => { btn.textContent = 'Save'; }, 2000);
+  });
+
+  // Save all
+  document.getElementById('save-all-products').onclick = () => {
+    const ov = getProductOverrides();
+    tbody.querySelectorAll('tr').forEach(row => {
+      const nameInput  = row.querySelector('input[data-field="name"]');
+      const priceInput = row.querySelector('input[data-field="price"]');
+      if (!nameInput) return;
+      const id = +nameInput.dataset.id;
+      const p  = PRODUCTS.find(x => x.id === id);
+      if (!p) return;
+      const newName  = nameInput.value.trim() || p.name;
+      const newPrice = Math.max(0, parseFloat(priceInput.value) || 0);
+      p.name  = newName;
+      p.price = newPrice;
+      ov[id]  = { name: newName, price: newPrice };
+      const statusCell = row.querySelector('.prod-status');
+      if (statusCell) statusCell.innerHTML = '<span class="badge badge-warn">Modified</span>';
+    });
+    saveProductOverrides(ov);
+    const saveBtn = document.getElementById('save-all-products');
+    const orig    = saveBtn.textContent;
+    saveBtn.textContent = '✅ All Saved!';
+    setTimeout(() => { saveBtn.textContent = orig; }, 2000);
+  };
 }

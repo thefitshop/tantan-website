@@ -81,6 +81,17 @@ const PRODUCTS = [
 
 ];
 
+// ── Apply dashboard product overrides ────────
+(function () {
+  const ov = JSON.parse(localStorage.getItem('tantan_product_overrides')) || {};
+  PRODUCTS.forEach(function (p) {
+    if (ov[p.id]) {
+      if (ov[p.id].name  !== undefined) p.name  = ov[p.id].name;
+      if (ov[p.id].price !== undefined) p.price = ov[p.id].price;
+    }
+  });
+}());
+
 // ── Category display config ───────────────────
 const CAT_ORDER = [
   'Tanning Oils',

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Owner Dashboard — TanTan</title>
-  <link rel="stylesheet" href="dashboard.css?v=1" />
+  <link rel="stylesheet" href="dashboard.css?v=2" />
 </head>
 <body>
 
@@ -41,6 +41,7 @@
       <button class="dash-tab-btn" data-tab="orders">🧾 Orders</button>
       <button class="dash-tab-btn" data-tab="customers">👥 Customers</button>
       <button class="dash-tab-btn" data-tab="pl">💰 P&amp;L</button>
+      <button class="dash-tab-btn" data-tab="products">🏷️ Products</button>
     </nav>
 
     <!-- ── Stock Panel ── -->
@@ -156,9 +157,32 @@
       </p>
     </div>
 
+    <!-- ── Products Panel ── -->
+    <div class="dash-panel" id="panel-products">
+      <div class="dash-section-header">
+        <h2>🏷️ Product Management</h2>
+        <button class="save-all-btn" id="save-all-products">💾 Save All Changes</button>
+      </div>
+      <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1.5rem">Edit product names and prices below. Changes appear on the products page immediately for new visitors. Use <strong>Save</strong> per row or <strong>Save All Changes</strong> to update everything at once.</p>
+      <div class="dash-table-wrap">
+        <table class="dash-table">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Product Name</th>
+              <th>Price (£)</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="products-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
   </div><!-- /#dash-app -->
 
-  <script src="script.js?v=27"></script>
-  <script src="dashboard.js?v=1"></script>
+  <script src="script.js?v=28"></script>
+  <script src="dashboard.js?v=2"></script>
 </body>
 </html>
