@@ -68,8 +68,6 @@ const PRODUCTS = [
   { id: 40, cat: 'Tanning Mitts', name: 'Tanning Mitt Medium', emoji: '🧤', grad: 'g7', price: 15.00, desc: 'The everyday essential. Our medium mitt fits most hands perfectly and glides product on evenly across arms, legs and the torso — your go-to for a flawless, professional-looking tan.' },
   { id: 41, cat: 'Tanning Mitts', name: 'Tanning Mitt Large',  emoji: '🧤', grad: 'g7', price: 15.00, desc: 'Cover more skin in less time with our generously sized large mitt. Ideal for quickly and evenly applying tanning product across the back, stomach and legs for a salon-quality finish at home.' },
 
-  // ── Accessories ──
-  { id: 7, cat: 'Accessories', name: 'Tanning Mitt', emoji: '🧤', grad: 'g7', price: 9.99, desc: 'Premium double-sided velvet applicator for a perfectly streak-free finish.' },
 ];
 
 // ── Category display config ───────────────────
@@ -85,7 +83,6 @@ const CAT_ORDER = [
   'Self Tans',
   'Skincare',
   'Tanning Mitts',
-  'Accessories',
 ];
 
 const CAT_ICONS = {
@@ -100,7 +97,6 @@ const CAT_ICONS = {
   'Self Tans':          '🌟',
   'Skincare':           '🌸',
   'Tanning Mitts':      '🧤',
-  'Accessories':        '🧤',
 };
 
 // ── Basket (localStorage) ───────────────────
