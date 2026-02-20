@@ -100,48 +100,52 @@ const CAT_ICONS = {
 
 // ── Apply dashboard product overrides, deletions, renames & added products ──
 (function () {
-  const ov       = JSON.parse(localStorage.getItem('tantan_product_overrides')) || {};
-  const deleted  = JSON.parse(localStorage.getItem('tantan_deleted_products'))  || [];
-  const catNames = JSON.parse(localStorage.getItem('tantan_cat_names'))         || {};
-  const added    = JSON.parse(localStorage.getItem('tantan_added_products'))    || [];
+  try {
+    const ov       = JSON.parse(localStorage.getItem('tantan_product_overrides')) || {};
+    const deleted  = JSON.parse(localStorage.getItem('tantan_deleted_products'))  || [];
+    const catNames = JSON.parse(localStorage.getItem('tantan_cat_names'))         || {};
+    const added    = JSON.parse(localStorage.getItem('tantan_added_products'))    || [];
 
-  // 1. Remove deleted products (reverse splice keeps indices stable)
-  for (var i = PRODUCTS.length - 1; i >= 0; i--) {
-    if (deleted.includes(PRODUCTS[i].id)) PRODUCTS.splice(i, 1);
-  }
-
-  // 2. Apply name / price / category overrides
-  PRODUCTS.forEach(function (p) {
-    if (ov[p.id]) {
-      if (ov[p.id].name  !== undefined) p.name  = ov[p.id].name;
-      if (ov[p.id].price !== undefined) p.price = ov[p.id].price;
-      if (ov[p.id].cat   !== undefined) p.cat   = ov[p.id].cat;
+    // 1. Remove deleted products (reverse splice keeps indices stable)
+    for (var i = PRODUCTS.length - 1; i >= 0; i--) {
+      if (deleted.includes(PRODUCTS[i].id)) PRODUCTS.splice(i, 1);
     }
-  });
 
-  // 3. Rename categories in CAT_ORDER, PRODUCTS and CAT_ICONS
-  if (Object.keys(catNames).length) {
-    for (var j = 0; j < CAT_ORDER.length; j++) {
-      if (catNames[CAT_ORDER[j]]) CAT_ORDER[j] = catNames[CAT_ORDER[j]];
-    }
+    // 2. Apply name / price / category overrides
     PRODUCTS.forEach(function (p) {
-      if (catNames[p.cat]) p.cat = catNames[p.cat];
-    });
-    Object.keys(catNames).forEach(function (orig) {
-      var display = catNames[orig];
-      if (CAT_ICONS[orig] !== undefined && CAT_ICONS[display] === undefined) {
-        CAT_ICONS[display] = CAT_ICONS[orig];
+      if (ov[p.id]) {
+        if (ov[p.id].name  !== undefined) p.name  = ov[p.id].name;
+        if (ov[p.id].price !== undefined) p.price = ov[p.id].price;
+        if (ov[p.id].cat   !== undefined) p.cat   = ov[p.id].cat;
       }
     });
-  }
 
-  // 4. Push user-added products into PRODUCTS (skip any that were later deleted)
-  added.forEach(function (ap) {
-    if (!deleted.includes(ap.id)) {
-      PRODUCTS.push(ap);
-      if (!CAT_ORDER.includes(ap.cat)) CAT_ORDER.push(ap.cat);
+    // 3. Rename categories in CAT_ORDER, PRODUCTS and CAT_ICONS
+    if (Object.keys(catNames).length) {
+      for (var j = 0; j < CAT_ORDER.length; j++) {
+        if (catNames[CAT_ORDER[j]]) CAT_ORDER[j] = catNames[CAT_ORDER[j]];
+      }
+      PRODUCTS.forEach(function (p) {
+        if (catNames[p.cat]) p.cat = catNames[p.cat];
+      });
+      Object.keys(catNames).forEach(function (orig) {
+        var display = catNames[orig];
+        if (CAT_ICONS[orig] !== undefined && CAT_ICONS[display] === undefined) {
+          CAT_ICONS[display] = CAT_ICONS[orig];
+        }
+      });
     }
-  });
+
+    // 4. Push user-added products into PRODUCTS (skip any that were later deleted)
+    added.forEach(function (ap) {
+      if (!deleted.includes(ap.id)) {
+        PRODUCTS.push(ap);
+        if (!CAT_ORDER.includes(ap.cat)) CAT_ORDER.push(ap.cat);
+      }
+    });
+  } catch (e) {
+    console.error('[TanTan] Failed to apply dashboard overrides — products shown in default state:', e);
+  }
 }());
 
 // ── Basket (localStorage) ───────────────────
