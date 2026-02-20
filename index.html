@@ -1,43 +1,48 @@
 <!DOCTYPE html>
-<html lang="en" prefix="og: https://ogp.me/ns#">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TanTan — Premium Tanning Products</title>
-  <meta name="description" content="Premium fruity scented tanning products for a sun-kissed glow all year round. Strawberry, orange, watermelon and coconut scents. Shop now." />
-
-  <!-- ── Open Graph / Facebook ── -->
-  <meta property="og:type"        content="website" />
-  <meta property="og:url"         content="https://thefitshop.github.io/tantan-website/" />
-  <meta property="og:title"       content="TanTan — Your Golden Glow Awaits" />
-  <meta property="og:description" content="Premium fruity scented tanning products for a sun-kissed glow all year round. Strawberry, orange, watermelon &amp; coconut scents. Shop now!" />
-  <meta property="og:image"       content="https://thefitshop.github.io/tantan-website/og-image.png" />
-  <meta property="og:image:width"  content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt"   content="TanTan — Premium Tanning Products. Your golden glow awaits." />
-  <meta property="og:site_name"   content="TanTan" />
-  <meta property="og:locale"      content="en_GB" />
-
-  <!-- ── Twitter / X Card ── -->
-  <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="TanTan — Your Golden Glow Awaits" />
-  <meta name="twitter:description" content="Premium fruity scented tanning products for a sun-kissed glow all year round." />
-  <meta name="twitter:image"       content="https://thefitshop.github.io/tantan-website/og-image.png" />
+  <title>TanTan — Your Golden Glow Awaits</title>
+  <meta name="description" content="Premium fruity scented tanning products for a sun-kissed glow all year round." />
 
   <link rel="stylesheet" href="landing.css" />
 
-  <!--
-    Task 3 — Facebook crawler redirect:
-    Real browsers execute this script and are sent straight to the products page.
-    Facebook's crawler (facebookexternalhit / Facebot) does NOT execute JavaScript,
-    so it reads all the Open Graph meta tags above and builds a beautiful link preview.
-  -->
+  <!-- ── Bot & crawler detection — runs before anything renders ── -->
   <script>
     (function () {
       var ua = navigator.userAgent || '';
-      var isCrawler = /facebookexternalhit|Facebot|LinkedInBot|Twitterbot|Slackbot|WhatsApp|TelegramBot|AhrefsBot|SemrushBot|DuckDuckBot|bingbot|Googlebot|YandexBot|Baiduspider|bot|crawl|spider/i.test(ua);
-      if (!isCrawler) {
-        window.location.replace('products.html');
+
+      // Known Facebook crawler signatures + common scraper/bot patterns
+      var blocked = [
+        'facebookexternalhit', 'facebot', 'facebookbot',
+        'ahrefsbot', 'semrushbot', 'mj12bot', 'dotbot',
+        'petalbot', 'yisousupider', 'dataforseobot',
+        'aspiegelbot', 'bytespider', 'gptbot',
+        'ia_archiver', 'proximic', 'seznambot',
+        'baiduspider', 'yandexbot', 'sogou'
+      ];
+
+      var uaLower = ua.toLowerCase();
+      var isBlocked = blocked.some(function (sig) {
+        return uaLower.indexOf(sig) !== -1;
+      });
+
+      if (isBlocked) {
+        // Log to localStorage so the dashboard Security tab can display it
+        try {
+          var logs = JSON.parse(localStorage.getItem('tantan_blocked_bots') || '[]');
+          logs.unshift({
+            ua:     ua,
+            page:   'index',
+            time:   new Date().toISOString(),
+            reason: 'user-agent match'
+          });
+          if (logs.length > 200) logs.length = 200;
+          localStorage.setItem('tantan_blocked_bots', JSON.stringify(logs));
+        } catch (e) {}
+
+        window.location.replace('blocked.html');
       }
     }());
   </script>
