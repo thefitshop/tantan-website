@@ -1,0 +1,80 @@
+/* ── WhatsApp floating chat button ──────────────────────────────── */
+
+.wa-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #25D366;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 0.82rem 1.4rem 0.82rem 1rem;
+  border-radius: 50px;
+  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow:
+    0 4px 18px rgba(37, 211, 102, 0.50),
+    0 2px 6px  rgba(0, 0, 0, 0.12);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.wa-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow:
+    0 10px 32px rgba(37, 211, 102, 0.65),
+    0 3px 10px  rgba(0, 0, 0, 0.14);
+}
+
+.wa-btn:active {
+  transform: translateY(-1px) scale(1.01);
+}
+
+/* Subtle attention pulse ring */
+.wa-btn::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50px;
+  border: 2px solid rgba(37, 211, 102, 0.55);
+  animation: wa-pulse 2.8s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes wa-pulse {
+  0%   { opacity: 0.9; transform: scale(1);    }
+  65%  { opacity: 0;   transform: scale(1.22); }
+  100% { opacity: 0;   transform: scale(1.22); }
+}
+
+.wa-icon {
+  width: 27px;
+  height: 27px;
+  flex-shrink: 0;
+}
+
+.wa-label {
+  white-space: nowrap;
+}
+
+/* Mobile — icon-only on very small screens */
+@media (max-width: 380px) {
+  .wa-label {
+    display: none;
+  }
+  .wa-btn {
+    padding: 0.9rem;
+    border-radius: 50%;
+    bottom: 20px;
+    right: 20px;
+  }
+  .wa-btn::before {
+    border-radius: 50%;
+  }
+}
