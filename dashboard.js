@@ -5,12 +5,13 @@
    Change DASH_PASSWORD below to update it.
    ============================================ */
 
-const DASH_PASSWORD = 'TanTan2026';
-const SESSION_KEY   = 'tantan_dash_session';
-const ORDERS_KEY    = 'tantan_orders';
-const STOCK_KEY     = 'tantan_stock';
-const COSTS_KEY     = 'tantan_costs';
-const STATUS_KEY    = 'tantan_order_statuses';
+const DASH_PASSWORD          = 'TanTan2026';
+const SESSION_KEY            = 'tantan_dash_session';
+const ORDERS_KEY             = 'tantan_orders';
+const STOCK_KEY              = 'tantan_stock';
+const COSTS_KEY              = 'tantan_costs';
+const STATUS_KEY             = 'tantan_order_statuses';
+const PRODUCT_OVERRIDES_KEY  = 'tantan_product_overrides';
 
 // ── Helpers ──────────────────────────────────
 function fmt(n) { return '£' + Number(n).toFixed(2); }
@@ -346,7 +347,6 @@ function renderPL() {
 }
 
 // ── Products ──────────────────────────────────
-const PRODUCT_OVERRIDES_KEY = 'tantan_product_overrides';
 function getProductOverrides()  { return JSON.parse(localStorage.getItem(PRODUCT_OVERRIDES_KEY)) || {}; }
 function saveProductOverrides(o){ localStorage.setItem(PRODUCT_OVERRIDES_KEY, JSON.stringify(o)); }
 
