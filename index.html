@@ -8,6 +8,17 @@
 
   <link rel="stylesheet" href="landing.css" />
 
+  <!-- ── Skip landing page if customer has already confirmed UK ── -->
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem('tantan_uk_confirmed') === 'yes') {
+          window.location.replace('home.html');
+        }
+      } catch (e) {}
+    }());
+  </script>
+
   <!-- ── Bot & crawler detection — runs before anything renders ── -->
   <script>
     (function () {
@@ -135,7 +146,7 @@
     <p class="landing-msg" id="uk-msg" aria-live="polite"></p>
 
     <!-- Shop Now — disabled until checkbox is ticked -->
-    <a href="products.html" class="landing-btn landing-btn-disabled anim-fade"
+    <a href="home.html" class="landing-btn landing-btn-disabled anim-fade"
        id="shop-now-btn" style="animation-delay:0.46s"
        aria-disabled="true">
       Shop Now &nbsp;→
@@ -169,6 +180,9 @@
           wrap.classList.remove('shake');
           void wrap.offsetWidth;
           wrap.classList.add('shake');
+        } else {
+          // Mark as confirmed so the landing page is skipped on future visits
+          try { localStorage.setItem('tantan_uk_confirmed', 'yes'); } catch (e) {}
         }
       });
     }());
