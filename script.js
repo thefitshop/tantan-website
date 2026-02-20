@@ -26,9 +26,9 @@ const PRODUCTS = [
   { id: 43, cat: 'Tanning Oils', name: 'Tanning Oil Bundle (4)',    emoji: '🎁', grad: 'gspd', price: 125.00, desc: 'Go all out with our luxury four-oil bundle — choose any 4 of our premium tanning oils and save even more. Ideal for sharing, gifting, or building your ultimate tanning collection.' },
 
   // ── Aerosol Tans ──
-  { id: 13, cat: 'Aerosol Tans', name: 'Strawberry Aerosol Tan',    emoji: '🍓', grad: 'gfrs', price: 16.99, desc: 'A fine strawberry-scented mist that delivers a natural, streak-free bronze in seconds. Dries instantly with no sticky residue — perfect for on-the-go touch-ups.' },
-  { id: 14, cat: 'Aerosol Tans', name: 'Orange Aerosol Tan',        emoji: '🍊', grad: 'gfro', price: 16.99, desc: 'Zesty citrus-scented aerosol formula that builds a gorgeous, even bronze in one or two applications. Lightweight, fast-drying and transfer-resistant.' },
-  { id: 15, cat: 'Aerosol Tans', name: 'Watermelon Aerosol Tan',    emoji: '🍉', grad: 'gfrw', price: 16.99, desc: 'Cool and refreshing watermelon-scented aerosol that sprays on evenly for a seamless, buildable tan. Infused with aloe vera to keep skin soft and smooth.' },
+  { id: 13, cat: 'Aerosol Tans', name: 'Strawberry Aerosol Tan',    emoji: '🍓', grad: 'gfrs', price: 35.00, desc: 'A fine strawberry-scented mist that delivers a natural, streak-free bronze in seconds. Dries instantly with no sticky residue — perfect for on-the-go touch-ups.' },
+  { id: 14, cat: 'Aerosol Tans', name: 'Orange Aerosol Tan',        emoji: '🍊', grad: 'gfro', price: 35.00, desc: 'Zesty citrus-scented aerosol formula that builds a gorgeous, even bronze in one or two applications. Lightweight, fast-drying and transfer-resistant.' },
+  { id: 15, cat: 'Aerosol Tans', name: 'Watermelon Aerosol Tan',    emoji: '🍉', grad: 'gfrw', price: 35.00, desc: 'Cool and refreshing watermelon-scented aerosol that sprays on evenly for a seamless, buildable tan. Infused with aloe vera to keep skin soft and smooth.' },
   { id: 16, cat: 'Aerosol Tans', name: 'Coconut Aerosol Tan',       emoji: '🥥', grad: 'gfrc', price: 17.99, desc: 'Luxurious coconut-scented aerosol tan that wraps skin in a veil of golden colour. Moisturising formula prevents patchiness for a long-lasting, salon-quality finish.' },
 
   // ── Spray Tan Solution ──
