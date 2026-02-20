@@ -277,7 +277,7 @@ function renderBasket() {
   `).join('');
 
   const subtotal = basketTotal();
-  const delivery = 3.99;
+  const delivery = 5.00;
   const total    = subtotal + delivery;
 
   const subEl = document.getElementById('sum-subtotal');
@@ -318,7 +318,7 @@ function initCheckout() {
 
   const basket   = getBasket();
   const subtotal = basketTotal();
-  const delivery = 3.99;
+  const delivery = 5.00;
   const total    = subtotal + delivery;
 
   if (coList) {
