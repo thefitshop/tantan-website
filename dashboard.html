@@ -43,6 +43,7 @@
       <button class="dash-tab-btn" data-tab="pl">💰 P&amp;L</button>
       <button class="dash-tab-btn" data-tab="products">🏷️ Products</button>
       <button class="dash-tab-btn" data-tab="popular">📊 Popular</button>
+      <button class="dash-tab-btn" data-tab="security">🛡️ Security</button>
     </nav>
 
     <!-- ── Stock Panel ── -->
@@ -270,6 +271,37 @@
       </div>
     </div>
 
+    <!-- ── Security Panel ── -->
+    <div class="dash-panel" id="panel-security">
+      <div class="dash-section-header">
+        <h2>🛡️ Security Log</h2>
+        <button class="save-all-btn" id="sec-clear-btn">🗑️ Clear Log</button>
+      </div>
+      <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1.5rem">
+        Blocked bot attempts detected by user-agent matching on the landing page. Only bots that execute JavaScript are captured here.
+      </p>
+      <div id="sec-summary" style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem"></div>
+      <div class="dash-table-wrap" id="sec-table-wrap">
+        <table class="dash-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Date &amp; Time</th>
+              <th>Page</th>
+              <th>Reason</th>
+              <th>User Agent</th>
+            </tr>
+          </thead>
+          <tbody id="sec-tbody"></tbody>
+        </table>
+      </div>
+      <div id="sec-empty" class="dash-empty" style="display:none">
+        <div class="dash-empty-icon">🛡️</div>
+        <h3>No blocked attempts yet</h3>
+        <p>When a bot matching a blocked user-agent visits the landing page, it will be logged here.</p>
+      </div>
+    </div>
+
   </div><!-- /#dash-app -->
 
   <script src="script.js?v=35"></script>
@@ -282,6 +314,7 @@
   <script src="dashboard-pl.js?v=1"></script>
   <script src="dashboard-products.js?v=1"></script>
   <script src="dashboard-popular.js?v=1"></script>
+  <script src="dashboard-security.js?v=1"></script>
   <!-- Login / init — loaded last so all sections are defined -->
   <script src="dashboard-login.js?v=1"></script>
 </body>

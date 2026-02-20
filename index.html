@@ -43,7 +43,38 @@
         } catch (e) {}
 
         window.location.replace('blocked.html');
+        return;
       }
+
+      // ── Client-side rate limiting ──────────────────────────────────
+      // If the same browser loads this page more than 30 times within
+      // 60 seconds, treat it as automated / suspicious and block it.
+      try {
+        var now      = Date.now();
+        var window_ms = 60000; // 1 minute
+        var maxHits  = 30;
+        var visits   = JSON.parse(localStorage.getItem('tantan_rl_visits') || '[]');
+
+        // Expire old entries outside the time window
+        visits = visits.filter(function (t) { return now - t < window_ms; });
+
+        if (visits.length >= maxHits) {
+          var logs = JSON.parse(localStorage.getItem('tantan_blocked_bots') || '[]');
+          logs.unshift({
+            ua:     ua,
+            page:   'index',
+            time:   new Date(now).toISOString(),
+            reason: 'rate-limit (' + visits.length + ' hits/60s)'
+          });
+          if (logs.length > 200) logs.length = 200;
+          localStorage.setItem('tantan_blocked_bots', JSON.stringify(logs));
+          window.location.replace('blocked.html');
+          return;
+        }
+
+        visits.push(now);
+        localStorage.setItem('tantan_rl_visits', JSON.stringify(visits));
+      } catch (e) {}
     }());
   </script>
 </head>
