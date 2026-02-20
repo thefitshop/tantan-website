@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Owner Dashboard — TanTan</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+
+  <!-- ── Login Screen ── -->
+  <div id="dash-login">
+    <div class="login-box">
+      <div class="login-logo">Tan<em>Tan</em></div>
+      <p class="login-subtitle">Owner Dashboard<br>Private access only — do not share this link.</p>
+      <label class="login-label" for="dash-password">Password</label>
+      <input type="password" id="dash-password" placeholder="Enter your password" />
+      <button class="login-btn" id="dash-login-btn">Access Dashboard →</button>
+      <p class="login-error" id="login-error"></p>
+    </div>
+  </div>
+
+  <!-- ── Dashboard App ── -->
+  <div id="dash-app" style="display:none">
+
+    <!-- Header -->
+    <header class="dash-header">
+      <div>
+        <span class="dash-header-logo">Tan<em>Tan</em></span>
+        <span class="dash-header-tag">Owner</span>
+      </div>
+      <div class="dash-header-right">
+        <span class="dash-owner-label">Private Dashboard</span>
+        <button class="dash-logout-btn" id="dash-logout">Log Out</button>
+      </div>
+    </header>
+
+    <!-- Tab Navigation -->
+    <nav class="dash-tabs">
+      <button class="dash-tab-btn active" data-tab="stock">📦 Stock</button>
+      <button class="dash-tab-btn" data-tab="orders">🧾 Orders</button>
+      <button class="dash-tab-btn" data-tab="customers">👥 Customers</button>
+      <button class="dash-tab-btn" data-tab="pl">💰 P&amp;L</button>
+    </nav>
+
+    <!-- ── Stock Panel ── -->
+    <div class="dash-panel active" id="panel-stock">
+      <div class="dash-section-header">
+        <h2>📦 Stock Management</h2>
+        <button class="save-all-btn" id="save-all-stock">💾 Save All Changes</button>
+      </div>
+      <div id="low-stock-alert"></div>
+      <div class="dash-table-wrap">
+        <table class="dash-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Category</th>
+              <th>Sale Price</th>
+              <th>Cost Price (£)</th>
+              <th>Stock Qty</th>
+              <th>Status</th>
+              <th>Update</th>
+            </tr>
+          </thead>
+          <tbody id="stock-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── Orders Panel ── -->
+    <div class="dash-panel" id="panel-orders">
+      <div class="dash-section-header">
+        <h2>🧾 Orders</h2>
+        <span id="order-count" style="font-size:0.875rem;color:var(--muted)"></span>
+      </div>
+      <div class="dash-table-wrap" id="orders-table-wrap">
+        <table class="dash-table">
+          <thead>
+            <tr>
+              <th>Order #</th>
+              <th>Date &amp; Time</th>
+              <th>Customer</th>
+              <th>Items Ordered</th>
+              <th>Total</th>
+              <th>Payment</th>
+            </tr>
+          </thead>
+          <tbody id="orders-tbody"></tbody>
+        </table>
+      </div>
+      <div id="orders-empty" class="dash-empty" style="display:none">
+        <div class="dash-empty-icon">🧾</div>
+        <h3>No orders yet</h3>
+        <p>Orders placed through the website will appear here automatically.</p>
+      </div>
+    </div>
+
+    <!-- ── Customers Panel ── -->
+    <div class="dash-panel" id="panel-customers">
+      <div class="dash-section-header">
+        <h2>👥 Customer Information</h2>
+        <span id="customer-count" style="font-size:0.875rem;color:var(--muted)"></span>
+      </div>
+      <div class="dash-table-wrap" id="customers-table-wrap">
+        <table class="dash-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Total Orders</th>
+              <th>Total Spent</th>
+              <th>Last Order</th>
+            </tr>
+          </thead>
+          <tbody id="customers-tbody"></tbody>
+        </table>
+      </div>
+      <div id="customers-empty" class="dash-empty" style="display:none">
+        <div class="dash-empty-icon">👥</div>
+        <h3>No customers yet</h3>
+        <p>Customer details are collected automatically when orders are placed.</p>
+      </div>
+    </div>
+
+    <!-- ── P&L Panel ── -->
+    <div class="dash-panel" id="panel-pl">
+      <div class="dash-section-header">
+        <h2>💰 Profit &amp; Loss</h2>
+      </div>
+      <div class="pl-cards" id="pl-cards"></div>
+
+      <p class="pl-subtitle">This Month — Weekly Breakdown</p>
+      <div class="dash-table-wrap" style="margin-bottom:2rem">
+        <table class="dash-table">
+          <thead>
+            <tr><th>Week</th><th>Orders</th><th>Revenue</th><th>Est. Cost</th><th>Profit</th></tr>
+          </thead>
+          <tbody id="pl-weekly-tbody"></tbody>
+        </table>
+      </div>
+
+      <p class="pl-subtitle">Monthly Summary — Last 6 Months</p>
+      <div class="dash-table-wrap">
+        <table class="dash-table">
+          <thead>
+            <tr><th>Month</th><th>Orders</th><th>Revenue</th><th>Est. Cost</th><th>Profit</th></tr>
+          </thead>
+          <tbody id="pl-monthly-tbody"></tbody>
+        </table>
+      </div>
+      <p style="font-size:0.78rem;color:var(--muted);margin-top:1rem">
+        * Estimated cost uses the cost prices set in the Stock tab. Update those for accurate P&amp;L figures.
+      </p>
+    </div>
+
+  </div><!-- /#dash-app -->
+
+  <script src="script.js?v=24"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

@@ -358,6 +358,14 @@ function initCheckout() {
     placeBtn.addEventListener('click', () => {
       const selected = document.querySelector('.pay-option.selected');
       if (!selected) { showToast('Please select a payment method'); return; }
+
+      // Validate customer details
+      const nameEl  = document.getElementById('cust-name');
+      const emailEl = document.getElementById('cust-email');
+      const phoneEl = document.getElementById('cust-phone');
+      if (nameEl  && !nameEl.value.trim())  { showToast('Please enter your full name');  nameEl.focus();  return; }
+      if (emailEl && !emailEl.value.trim()) { showToast('Please enter your email address'); emailEl.focus(); return; }
+
       if (selected.dataset.method === 'card') {
         const inputs = cardForm.querySelectorAll('input');
         for (const inp of inputs) {
@@ -365,6 +373,34 @@ function initCheckout() {
         }
       }
       if (basket.length === 0) { showToast('Your basket is empty'); return; }
+
+      // Save order to localStorage
+      const orders  = JSON.parse(localStorage.getItem('tantan_orders')) || [];
+      const orderId = 'ORD-' + String(orders.length + 1).padStart(3, '0');
+      orders.push({
+        id: orderId,
+        date: new Date().toISOString(),
+        customer: {
+          name:  nameEl  ? nameEl.value.trim()  : '',
+          email: emailEl ? emailEl.value.trim() : '',
+          phone: phoneEl ? phoneEl.value.trim() : ''
+        },
+        items:    basket.map(i => ({ id: i.id, name: i.name, price: i.price, qty: i.qty })),
+        subtotal: subtotal,
+        delivery: delivery,
+        total:    total,
+        paymentMethod: selected.dataset.method
+      });
+      localStorage.setItem('tantan_orders', JSON.stringify(orders));
+
+      // Reduce stock
+      const stock = JSON.parse(localStorage.getItem('tantan_stock')) || {};
+      basket.forEach(item => {
+        const cur = stock[item.id] !== undefined ? stock[item.id] : 50;
+        stock[item.id] = Math.max(0, cur - item.qty);
+      });
+      localStorage.setItem('tantan_stock', JSON.stringify(stock));
+
       clearBasket();
       if (wrapper) wrapper.style.display = 'none';
       if (success) success.classList.add('show');
