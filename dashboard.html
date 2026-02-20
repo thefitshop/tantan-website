@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Owner Dashboard — TanTan</title>
-  <link rel="stylesheet" href="dashboard.css?v=3" />
+  <link rel="stylesheet" href="dashboard.css?v=4" />
 </head>
 <body>
 
@@ -105,14 +105,17 @@
         <h2>👥 Customer Information</h2>
         <span id="customer-count" style="font-size:0.875rem;color:var(--muted)"></span>
       </div>
+      <div class="cust-search-wrap">
+        <input type="text" id="cust-search" class="cust-search-input" placeholder="🔍  Search by name or email…" />
+      </div>
       <div class="dash-table-wrap" id="customers-table-wrap">
         <table class="dash-table">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Total Orders</th>
+              <th>Customer</th>
+              <th>Delivery Address</th>
+              <th>Products Ordered</th>
+              <th>Orders</th>
               <th>Total Spent</th>
               <th>Last Order</th>
             </tr>
@@ -124,6 +127,11 @@
         <div class="dash-empty-icon">👥</div>
         <h3>No customers yet</h3>
         <p>Customer details are collected automatically when orders are placed.</p>
+      </div>
+      <div id="customers-no-results" class="dash-empty" style="display:none">
+        <div class="dash-empty-icon">🔍</div>
+        <h3>No results found</h3>
+        <p>Try a different name or email address.</p>
       </div>
     </div>
 
@@ -209,6 +217,6 @@
   </div><!-- /#dash-app -->
 
   <script src="script.js?v=29"></script>
-  <script src="dashboard.js?v=7"></script>
+  <script src="dashboard.js?v=8"></script>
 </body>
 </html>
