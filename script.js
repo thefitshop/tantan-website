@@ -8,8 +8,8 @@ const PRODUCTS = [
 
   // ── Self Tans ──
   { id: 1, cat: 'Self Tans', name: 'Self-Tan Mousse',       emoji: '✨', grad: 'g1',   price: 24.99, desc: 'Ultra-light foam for a flawless, streak-free bronze lasting up to 7 days.' },
-  { id: 2, cat: 'Self Tans', name: 'Gradual Tan Lotion',    emoji: '🌿', grad: 'g2',   price: 19.99, desc: 'Build your perfect glow over 3–5 days with our nourishing daily moisturiser.' },
-  { id: 4, cat: 'Self Tans', name: 'Tan Accelerator',       emoji: '⚡', grad: 'g4',   price: 29.99, desc: 'Our best-selling formula boosts natural tan development up to 3× faster.' },
+  { id: 2, cat: 'Self Tans', name: 'Gradual Tan Lotion',    emoji: '🌿', grad: 'g2',   price: 45.00, desc: 'Build your perfect glow over 3–5 days with our nourishing daily moisturiser.' },
+  { id: 4, cat: 'Self Tans', name: 'Tan Accelerator',       emoji: '⚡', grad: 'g4',   price: 45.00, desc: 'Our best-selling formula boosts natural tan development up to 3× faster.' },
   { id: 6, cat: 'Self Tans', name: 'Face Tan Drops',        emoji: '💫', grad: 'g6',   price: 27.99, desc: 'Buildable serum drops mixed into your moisturiser for a natural-looking glow.' },
 
   // ── Tanning Oils ──
