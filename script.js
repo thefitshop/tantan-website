@@ -13,11 +13,11 @@ const PRODUCTS = [
   { id: 6, cat: 'Self Tans', name: 'Face Tan Drops',        emoji: '💫', grad: 'g6',   price: 27.99, desc: 'Buildable serum drops mixed into your moisturiser for a natural-looking glow.' },
 
   // ── Tanning Oils ──
-  { id: 3,  cat: 'Tanning Oils', name: 'Tanning Oil',               emoji: '🌴', grad: 'g3',   price: 22.99, desc: 'Tropical coconut & argan oil for a deep, golden colour with a gorgeous scent.' },
-  { id: 9,  cat: 'Tanning Oils', name: 'Strawberry Tanning Oil',    emoji: '🍓', grad: 'gfrs', price: 19.99, desc: 'Sun-ripened strawberry extract blended with vitamin E and argan oil for a deep, luscious golden tan and an irresistible fruity fragrance.' },
-  { id: 10, cat: 'Tanning Oils', name: 'Orange Tanning Oil',        emoji: '🍊', grad: 'gfro', price: 19.99, desc: 'Vitamin C-packed orange peel extract combined with light-reflecting pigments to boost your tan and leave skin glowing with a zesty citrus scent.' },
-  { id: 11, cat: 'Tanning Oils', name: 'Watermelon Tanning Oil',    emoji: '🍉', grad: 'gfrw', price: 19.99, desc: 'Refreshing watermelon extract and hyaluronic acid deeply hydrate as you tan, leaving skin dewy, plump and sun-kissed with a cooling summer scent.' },
-  { id: 12, cat: 'Tanning Oils', name: 'Coconut Tanning Oil',       emoji: '🥥', grad: 'gfrc', price: 21.99, desc: 'Signature tropical blend of coconut oil and monoi de Tahiti that deepens your tan beautifully while wrapping you in a dreamy island fragrance.' },
+  { id: 3,  cat: 'Tanning Oils', name: 'Tanning Oil',               emoji: '🌴', grad: 'g3',   price: 35.00, desc: 'Tropical coconut & argan oil for a deep, golden colour with a gorgeous scent.' },
+  { id: 9,  cat: 'Tanning Oils', name: 'Strawberry Tanning Oil',    emoji: '🍓', grad: 'gfrs', price: 35.00, desc: 'Sun-ripened strawberry extract blended with vitamin E and argan oil for a deep, luscious golden tan and an irresistible fruity fragrance.' },
+  { id: 10, cat: 'Tanning Oils', name: 'Orange Tanning Oil',        emoji: '🍊', grad: 'gfro', price: 35.00, desc: 'Vitamin C-packed orange peel extract combined with light-reflecting pigments to boost your tan and leave skin glowing with a zesty citrus scent.' },
+  { id: 11, cat: 'Tanning Oils', name: 'Watermelon Tanning Oil',    emoji: '🍉', grad: 'gfrw', price: 35.00, desc: 'Refreshing watermelon extract and hyaluronic acid deeply hydrate as you tan, leaving skin dewy, plump and sun-kissed with a cooling summer scent.' },
+  { id: 12, cat: 'Tanning Oils', name: 'Coconut Tanning Oil',       emoji: '🥥', grad: 'gfrc', price: 35.00, desc: 'Signature tropical blend of coconut oil and monoi de Tahiti that deepens your tan beautifully while wrapping you in a dreamy island fragrance.' },
 
   // ── Aerosol Tans ──
   { id: 13, cat: 'Aerosol Tans', name: 'Strawberry Aerosol Tan',    emoji: '🍓', grad: 'gfrs', price: 16.99, desc: 'A fine strawberry-scented mist that delivers a natural, streak-free bronze in seconds. Dries instantly with no sticky residue — perfect for on-the-go touch-ups.' },
