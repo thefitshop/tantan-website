@@ -43,6 +43,9 @@ const PRODUCTS = [
   { id: 23, cat: 'Tanning Gel', name: 'Tanning Gel Light Watermelon',   emoji: '🍉', grad: 'gfrw', price: 21.99, desc: 'Refreshing watermelon-scented gel that glides on effortlessly for a subtle, natural-looking glow. Infused with watermelon seed oil to keep skin silky soft.' },
   { id: 24, cat: 'Tanning Gel', name: 'Tanning Gel Medium Strawberry',  emoji: '🍓', grad: 'gfrs', price: 22.99, desc: 'Medium-depth strawberry gel packed with antioxidant-rich strawberry extract. Develops into a gorgeous, rosy-bronze tan that lasts up to 7 days.' },
   { id: 25, cat: 'Tanning Gel', name: 'Tanning Gel Dark Orange',        emoji: '🍊', grad: 'gfro', price: 23.99, desc: 'Our deepest orange-scented gel for a rich, intense tan. Argan oil and vitamin E ensure deep hydration while DHA creates a streak-free, dark bronze glow.' },
+  { id: 50, cat: 'Tanning Gel', name: 'Tanning Gel Light Orange',      emoji: '🍊', grad: 'gfro', price: 21.99, desc: 'A fresh, zesty orange-scented light gel that develops into a subtle, sun-kissed glow. Enriched with vitamin C and aloe vera for a bright, luminous finish on all skin tones.' },
+  { id: 51, cat: 'Tanning Gel', name: 'Tanning Gel Medium Watermelon', emoji: '🍉', grad: 'gfrw', price: 22.99, desc: 'Cool, refreshing watermelon gel that melts into skin for a gorgeous medium bronze. Packed with hydrating watermelon seed oil to keep skin soft, plump and glowing all day.' },
+  { id: 52, cat: 'Tanning Gel', name: 'Tanning Gel Dark Strawberry',   emoji: '🍓', grad: 'gfrs', price: 23.99, desc: 'Our richest strawberry gel for a deep, intense bronze with an irresistible fruity fragrance. Strawberry extract and DHA work together for a long-lasting, flawless dark tan.' },
 
   // ── Skincare ──
   { id: 5, cat: 'Skincare', name: 'After-Sun Moisturiser', emoji: '🌸', grad: 'g5', price: 27.50, desc: 'Soothe, cool and extend your tan with aloe vera, vitamin E & shea butter.' },
