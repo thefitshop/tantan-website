@@ -272,11 +272,32 @@ nav {
 .g7 { background: linear-gradient(135deg, #ece0d0 0%, #b09070 100%); }
 .g8 { background: linear-gradient(135deg, #f4ede0 0%, #c8a870 100%); }
 
+/* Fruity flavour gradients */
+.gfrs { background: linear-gradient(135deg, #ffd0d8 0%, #e83058 100%); } /* strawberry */
+.gfro { background: linear-gradient(135deg, #ffe4b0 0%, #ff7800 100%); } /* orange     */
+.gfrw { background: linear-gradient(135deg, #c8f0a8 0%, #e82848 100%); } /* watermelon */
+.gfrc { background: linear-gradient(135deg, #f4ede0 0%, #c8a060 100%); } /* coconut    */
+
+/* Spray tan solution depth gradients */
+.gspl { background: linear-gradient(135deg, #fef8e8 0%, #e8d068 100%); } /* light  */
+.gspm { background: linear-gradient(135deg, #f0d890 0%, #c87828 100%); } /* medium */
+.gspd { background: linear-gradient(135deg, #d49050 0%, #4c2808 100%); } /* dark   */
+
 .product-body { padding: 1.4rem; flex: 1; display: flex; flex-direction: column; }
 .product-name { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem; }
 .product-desc { color: var(--muted); font-size: 0.875rem; flex: 1; margin-bottom: 1.2rem; line-height: 1.5; }
 .product-footer { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
 .product-price { font-size: 1.3rem; font-weight: 800; color: var(--golden); }
+/* Category sections on products page */
+.cat-section { margin-bottom: 4rem; }
+.cat-title {
+  font-size: 1.55rem; font-weight: 800; color: var(--dark);
+  margin-bottom: 1.5rem; padding-bottom: 0.8rem;
+  border-bottom: 3px solid var(--sand);
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.cat-icon { font-size: 1.3rem; }
+
 .add-btn {
   background: var(--golden); color: var(--white);
   border: none; padding: 0.55rem 1.1rem;
