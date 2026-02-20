@@ -394,3 +394,70 @@ a { text-decoration: none; color: inherit; }
   .cat-name-current { min-width: 120px; }
   .cat-name-input { width: 100%; }
 }
+
+/* ── Security Tab ───────────────────────────────────────────────── */
+
+/* Live badge */
+.sec-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #16a34a;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+/* Green live dot */
+.sec-live-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+}
+
+/* Ripple animation triggered on each poll tick */
+@keyframes sec-dot-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+  60%  { box-shadow: 0 0 0 7px rgba(34, 197, 94, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+.sec-live-dot.sec-dot-pulse {
+  animation: sec-dot-pulse 0.7s ease forwards;
+}
+
+/* New row flash — amber highlight fades out over 3 s */
+@keyframes sec-row-flash {
+  from { background: rgba(245, 158, 11, 0.22); }
+  to   { background: transparent; }
+}
+.sec-row-new {
+  animation: sec-row-flash 3s ease forwards;
+}
+
+/* Reason tag */
+.sec-reason-tag {
+  background: rgba(220, 38, 38, 0.10);
+  color: #dc2626;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* UA cell */
+.sec-ua-cell {
+  font-size: 0.74rem;
+  color: var(--muted);
+  max-width: 320px;
+  word-break: break-all;
+  cursor: help;
+}

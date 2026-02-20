@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Owner Dashboard — TanTan</title>
-  <link rel="stylesheet" href="dashboard.css?v=6" />
+  <link rel="stylesheet" href="dashboard.css?v=7" />
 </head>
 <body>
 
@@ -275,10 +275,17 @@
     <div class="dash-panel" id="panel-security">
       <div class="dash-section-header">
         <h2>🛡️ Security Log</h2>
-        <button class="save-all-btn" id="sec-clear-btn">🗑️ Clear Log</button>
+        <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+          <span class="sec-live-badge">
+            <span class="sec-live-dot" id="sec-live-dot"></span>
+            Live
+          </span>
+          <span id="sec-last-checked" style="font-size:0.78rem;color:var(--muted)"></span>
+          <button class="save-all-btn" id="sec-clear-btn">🗑️ Clear Log</button>
+        </div>
       </div>
       <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1.5rem">
-        Blocked bot attempts detected by user-agent matching on the landing page. Only bots that execute JavaScript are captured here.
+        Blocked bot attempts detected by user-agent matching on the landing page. Polls every 3 seconds — new rows flash amber. Only JS-executing bots are captured here.
       </p>
       <div id="sec-summary" style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem"></div>
       <div class="dash-table-wrap" id="sec-table-wrap">
@@ -314,7 +321,7 @@
   <script src="dashboard-pl.js?v=1"></script>
   <script src="dashboard-products.js?v=1"></script>
   <script src="dashboard-popular.js?v=1"></script>
-  <script src="dashboard-security.js?v=1"></script>
+  <script src="dashboard-security.js?v=2"></script>
   <!-- Login / init — loaded last so all sections are defined -->
   <script src="dashboard-login.js?v=1"></script>
 </body>

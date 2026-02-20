@@ -60,7 +60,7 @@ function initDashboard() {
     { name: 'Popular Products', fn: renderPopular          },
     { name: 'Category Editor',  fn: renderCategoryEditor   },
     { name: 'Add Product Form', fn: initAddProductForm     },
-    { name: 'Security Log',     fn: renderSecurity         },
+    { name: 'Security Log',     fn: startSecurityPolling   },
   ];
 
   sections.forEach(function (section) {
