@@ -177,6 +177,20 @@ a { text-decoration: none; color: inherit; }
 .pl-card-sub { font-size: 0.78rem; color: var(--muted); margin-top: 0.3rem; }
 .pl-subtitle { font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: 1rem; margin-top: 2rem; }
 
+/* ── Delivery Status ── */
+.status-select {
+  padding: 0.35rem 0.6rem;
+  border: 1.5px solid var(--sand); border-radius: 6px;
+  font-size: 0.8rem; font-family: inherit; font-weight: 600;
+  background: var(--cream); color: var(--text);
+  cursor: pointer; outline: none; transition: border-color 0.2s;
+}
+.status-select:focus { border-color: var(--golden); }
+.status-select.s-pending    { border-color: #fbd38d; color: var(--warning); background: #fffaf0; }
+.status-select.s-processing { border-color: #90cdf4; color: #2b6cb0;       background: #ebf8ff; }
+.status-select.s-dispatched { border-color: #b794f4; color: #553c9a;       background: #faf5ff; }
+.status-select.s-delivered  { border-color: #9ae6b4; color: var(--success); background: #f0fff4; }
+
 /* ── Empty States ── */
 .dash-empty { text-align: center; padding: 4rem 2rem; color: var(--muted); }
 .dash-empty-icon { font-size: 3rem; margin-bottom: 1rem; }

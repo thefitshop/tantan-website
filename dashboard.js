@@ -10,6 +10,7 @@ const SESSION_KEY   = 'tantan_dash_session';
 const ORDERS_KEY    = 'tantan_orders';
 const STOCK_KEY     = 'tantan_stock';
 const COSTS_KEY     = 'tantan_costs';
+const STATUS_KEY    = 'tantan_order_statuses';
 
 // ── Helpers ──────────────────────────────────
 function fmt(n) { return '£' + Number(n).toFixed(2); }
@@ -31,6 +32,8 @@ function getCosts() {
 
 function saveStock(s) { localStorage.setItem(STOCK_KEY, JSON.stringify(s)); }
 function saveCosts(c) { localStorage.setItem(COSTS_KEY, JSON.stringify(c)); }
+function getStatuses() { return JSON.parse(localStorage.getItem(STATUS_KEY)) || {}; }
+function saveStatuses(s) { localStorage.setItem(STATUS_KEY, JSON.stringify(s)); }
 
 // ── Auth ─────────────────────────────────────
 function isLoggedIn() { return sessionStorage.getItem(SESSION_KEY) === '1'; }
@@ -149,12 +152,20 @@ function renderStock() {
 }
 
 // ── Orders ────────────────────────────────────
+const STATUS_OPTIONS = [
+  { value: 'pending',    label: '🕐 Pending' },
+  { value: 'processing', label: '⚙️ Processing' },
+  { value: 'dispatched', label: '🚚 Dispatched' },
+  { value: 'delivered',  label: '✅ Delivered' },
+];
+
 function renderOrders() {
-  const orders  = getOrders().slice().reverse();
-  const tbody   = document.getElementById('orders-tbody');
-  const empty   = document.getElementById('orders-empty');
-  const wrap    = document.getElementById('orders-table-wrap');
-  const countEl = document.getElementById('order-count');
+  const orders   = getOrders().slice().reverse();
+  const statuses = getStatuses();
+  const tbody    = document.getElementById('orders-tbody');
+  const empty    = document.getElementById('orders-empty');
+  const wrap     = document.getElementById('orders-table-wrap');
+  const countEl  = document.getElementById('order-count');
 
   countEl.textContent = `${orders.length} order${orders.length !== 1 ? 's' : ''}`;
 
@@ -164,13 +175,17 @@ function renderOrders() {
   wrap.style.display = 'block'; empty.style.display = 'none';
 
   tbody.innerHTML = orders.map(o => {
-    const d       = new Date(o.date);
-    const dateStr = d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-    const timeStr = d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-    const items   = o.items.map(i => `${i.name} ×${i.qty}`).join('<br>');
+    const d        = new Date(o.date);
+    const dateStr  = d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+    const timeStr  = d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    const items    = o.items.map(i => `${i.name} ×${i.qty}`).join('<br>');
     const payBadge = o.paymentMethod === 'cash'
       ? '<span class="badge badge-cash">💵 Cash</span>'
       : '<span class="badge badge-card">💳 Card</span>';
+    const currentStatus = statuses[o.id] || 'pending';
+    const statusOptions = STATUS_OPTIONS.map(s =>
+      `<option value="${s.value}" ${s.value === currentStatus ? 'selected' : ''}>${s.label}</option>`
+    ).join('');
     return `<tr>
       <td><strong>${o.id}</strong></td>
       <td>${dateStr}<br><span style="font-size:0.75rem;color:var(--muted)">${timeStr}</span></td>
@@ -181,10 +196,21 @@ function renderOrders() {
         ${o.customer.address ? `<span style="font-size:0.75rem;color:var(--muted)">${o.customer.address}, ${o.customer.city || ''} ${o.customer.postcode || ''}</span>` : ''}
       </td>
       <td style="font-size:0.82rem;color:var(--muted)">${items}</td>
-      <td><strong>${fmt(o.total)}</strong><br><span style="font-size:0.75rem;color:var(--muted)">incl. ${o.delivery === 0 ? 'free' : fmt(o.delivery)} delivery</span></td>
+      <td><strong>${fmt(o.total)}</strong><br><span style="font-size:0.75rem;color:var(--muted)">incl. ${fmt(o.delivery)} delivery</span></td>
       <td>${payBadge}</td>
+      <td><select class="status-select s-${currentStatus}" data-order-id="${o.id}">${statusOptions}</select></td>
     </tr>`;
   }).join('');
+
+  // Save status on change
+  tbody.querySelectorAll('.status-select').forEach(sel => {
+    sel.addEventListener('change', () => {
+      const s = getStatuses();
+      s[sel.dataset.orderId] = sel.value;
+      saveStatuses(s);
+      sel.className = `status-select s-${sel.value}`;
+    });
+  });
 }
 
 // ── Customers ─────────────────────────────────
