@@ -57,16 +57,6 @@ const PRODUCTS = [
   { id: 28, cat: 'Self Tanning Drops', name: 'Watermelon Self Tanning Drops',   emoji: '🍉', grad: 'gfrw', price: 22.99, desc: 'Cooling watermelon tanning drops packed with hydrating watermelon seed oil. Mix into your favourite moisturiser for a refreshing, buildable tan that nourishes as it develops.' },
   { id: 29, cat: 'Self Tanning Drops', name: 'Coconut Self Tanning Drops',      emoji: '🥥', grad: 'gfrc', price: 24.99, desc: 'Luxurious coconut tanning drops enriched with coconut milk. Add to your daily moisturiser for a gorgeous, customisable bronze with an irresistible island scent.' },
 
-  // ── Bronzing Butter ──
-  { id: 30, cat: 'Bronzing Butter', name: 'Bronzing Butter Light',  emoji: '🧈', grad: 'gspl', price: 21.99, desc: 'A rich, velvety light bronzing butter that melts into skin for a sheer, sun-touched glow. Shea butter and vitamin E deliver deep hydration alongside a beautiful, natural colour.' },
-  { id: 31, cat: 'Bronzing Butter', name: 'Bronzing Butter Medium', emoji: '🧈', grad: 'gspm', price: 21.99, desc: 'Our nourishing medium bronzing butter delivers a warm, golden bronze while intensely moisturising. Mango butter and jojoba oil leave skin silky-smooth and radiantly glowing.' },
-  { id: 32, cat: 'Bronzing Butter', name: 'Bronzing Butter Dark',   emoji: '🧈', grad: 'gspd', price: 23.99, desc: 'Deeply indulgent dark bronzing butter for a rich, luxurious tan. Formulated with argan oil, cocoa butter and DHA for a long-lasting, deeply moisturising colour.' },
-
-  // ── Tanning Water ──
-  { id: 33, cat: 'Tanning Water', name: 'Strawberry Tanning Water', emoji: '🍓', grad: 'gfrs', price: 17.99, desc: 'Ultra-light, fast-absorbing tanning water with a sweet strawberry scent. Spritz over clean skin for a buildable, even tan that dries in seconds — no streaks, no stickiness.' },
-  { id: 34, cat: 'Tanning Water', name: 'Orange Tanning Water',     emoji: '🍊', grad: 'gfro', price: 17.99, desc: 'Refreshing orange-scented tanning water that delivers a natural-looking bronze with zero effort. The ultra-fine mist absorbs instantly, leaving skin glowing with a fresh citrus scent.' },
-  { id: 35, cat: 'Tanning Water', name: 'Coconut Tanning Water',    emoji: '🥥', grad: 'gfrc', price: 17.99, desc: 'Dreamy coconut-scented tanning water for the most effortless glow. Mist on and let it dry for a perfectly even, tropical-scented tan that builds beautifully with each application.' },
-
   // ── Tanning Foam ──
   { id: 36, cat: 'Tanning Foam', name: 'Tanning Foam Light',  emoji: '🫧', grad: 'gspl', price: 21.99, desc: 'A featherlight, fast-drying foam for a gentle, natural-looking light tan. The airy texture glides on effortlessly and develops into a flawless subtle glow in just 4–6 hours.' },
   { id: 37, cat: 'Tanning Foam', name: 'Tanning Foam Medium', emoji: '🫧', grad: 'gspm', price: 21.99, desc: 'Our velvety medium tanning foam strikes the perfect balance — rich enough for a stunning bronze, light enough to feel like nothing on skin. Develops beautifully in 2–4 hours.' },
@@ -99,8 +89,6 @@ const CAT_ORDER = [
   'Spray Tan Solution',
   'Tanning Gel',
   'Self Tanning Drops',
-  'Bronzing Butter',
-  'Tanning Water',
   'Tanning Foam',
   'Self Tans',
   'Skincare',
@@ -113,8 +101,6 @@ const CAT_ICONS = {
   'Spray Tan Solution': '💎',
   'Tanning Gel':        '✨',
   'Self Tanning Drops': '💧',
-  'Bronzing Butter':    '🧈',
-  'Tanning Water':      '💦',
   'Tanning Foam':       '🫧',
   'Self Tans':          '🌟',
   'Skincare':           '🌸',
