@@ -73,6 +73,8 @@ const PRODUCTS = [
   { id: 39, cat: 'Tanning Mitts', name: 'Tanning Mitt Small',  emoji: '🧤', grad: 'g7', price: 15.00, desc: 'Our compact small mitt is perfect for precise application on hard-to-reach areas like the face, hands and ankles. Soft velvet finish ensures a seamless, streak-free result every time.' },
   { id: 40, cat: 'Tanning Mitts', name: 'Tanning Mitt Medium', emoji: '🧤', grad: 'g7', price: 15.00, desc: 'The everyday essential. Our medium mitt fits most hands perfectly and glides product on evenly across arms, legs and the torso — your go-to for a flawless, professional-looking tan.' },
   { id: 41, cat: 'Tanning Mitts', name: 'Tanning Mitt Large',  emoji: '🧤', grad: 'g7', price: 15.00, desc: 'Cover more skin in less time with our generously sized large mitt. Ideal for quickly and evenly applying tanning product across the back, stomach and legs for a salon-quality finish at home.' },
+  { id: 48, cat: 'Tanning Mitts', name: 'Tanning Mitt Bundle 1', emoji: '🎁', grad: 'gspl', price: 35.00, desc: 'Stock up and save — get 3 of our premium Tanning Mitts in one bundle. Perfect for keeping one in your bathroom, gym bag and handbag so you\'re always ready for a flawless application.' },
+  { id: 49, cat: 'Tanning Mitts', name: 'Tanning Mitt Bundle 2', emoji: '🎁', grad: 'gspm', price: 45.00, desc: 'Our best-value mitt bundle — 4 premium Tanning Mitts so you\'ll never run out. Great for sharing with friends, gifting, or simply making sure you always have a fresh mitt to hand.' },
 
 ];
 
